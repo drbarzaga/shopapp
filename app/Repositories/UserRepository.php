@@ -8,9 +8,7 @@
 
 namespace App\Repositories;
 
-
-
-use ShopApp\Models\User;
+use App\Models\User;
 
 class UserRepository implements IRepository
 {

@@ -3,17 +3,22 @@
 namespace App\Http\Controllers\Backend\User;
 
 use App\Http\Requests\Backend\StoreUserRequest;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function __construct()
+    private $repository;
+    public function __construct(UserRepository $repository)
     {
+        $this->repository = $repository;
     }
 
     public function index()
     {
+        $users = $this->repository->getAll();
+        dd($users);
         dd('ADMIN/USER/LIST');
     }
 
