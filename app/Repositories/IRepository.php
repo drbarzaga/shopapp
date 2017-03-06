@@ -11,17 +11,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 interface IRepository
 {
-    public function all($columns = array('*'));
+    public function getAll();
 
-    public function paginate($perPage = 15, $columns = array('*'));
+    public function getById($id);
 
-    public function create(array $data);
+    public function create(array $attributes);
 
-    public function update(array $data, $id);
+    public function update($id, array $attributes);
 
     public function delete($id);
-
-    public function find($id, $columns = array('*'));
-
-    public function findBy($field, $value, $columns = array('*'));
 }
