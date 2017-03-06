@@ -594,4 +594,60 @@ Route::group(['namespace'=>'Backend','prefix'=>'admin'],function (){
             ]);
         });
     });
+
+    /**
+     * Routes for Order namespace
+     */
+    Route::group(['namespace'=>'Order'],function (){
+        /**
+         * User authenticate required for access in this section
+         * this section contains the routes for access to the
+         * functions stores in OrderFieldSettingController
+         */
+        Route::group(['prefix'=>'order/field/setting'],function(){
+            /**
+             * Route for show all product field setting resources
+             */
+            Route::get('list',[
+                'as'=>'admin_order_field_setting_list',
+                'uses'=>'OrderFieldSettingController@index'
+            ]);
+            /**
+             * Route for show form for create product field setting
+             */
+            Route::get('create',[
+                'as'=>'admin_order_field_setting_create',
+                'uses'=>'OrderFieldSettingController@create'
+            ]);
+            /**
+             * Route for store product field setting
+             */
+            Route::post('store',[
+                'as'=>'admin_order_field_setting_store',
+                'uses'=>'OrderFieldSettingController@store'
+            ]);
+            /**
+             * Route show form for edit
+             */
+            Route::get('edit',[
+                'as'=>'admin_order_field_setting_edit',
+                'uses'=>'OrderFieldSettingController@edit'
+            ]);
+            /**
+             * Route for update product field setting
+             */
+            Route::post('update',[
+                'as'=>'admin_order_field_setting_update',
+                'uses'=>'OrderFieldSettingController@update'
+            ]);
+            /**
+             * Route for destroy product field setting
+             */
+            Route::post('destroy',[
+                'as'=>'admin_order_field_setting_destroy',
+                'uses'=>'OrderFieldSettingController@destroy'
+            ]);
+        });
+    });
+
 });
