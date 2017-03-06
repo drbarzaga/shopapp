@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductFieldSettingTable extends Migration
+class CreateSliderPhotoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateProductFieldSettingTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_field_setting',function(Blueprint $table){
+        Schema::create('slider_photo',function (Blueprint $table){
             $table->increments('id');
-            $table->string('field');
+            $table->string('photo');
+            $table->integer('slider_id')->unsigned();
+            $table->foreign('slider_id')->references('id')->on('slider')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +29,6 @@ class CreateProductFieldSettingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_field_setting');
+        Schema::dropIfExists('slider_photo');
     }
 }

@@ -4,12 +4,12 @@ namespace ShopApp;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductPhoto extends Model
+class OrderField extends Model
 {
-    protected $table = 'product_photo';
+    protected $table = 'order_field_setting';
 
     protected $fillable = [
-        'photo','product_id'
+        'field'
     ];
 
     protected $hidden=[];

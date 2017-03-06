@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSliderTable extends Migration
+class CreateUserFieldSettingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateSliderTable extends Migration
      */
     public function up()
     {
-        Schema::create('slider',function(Blueprint $table){
+        Schema::create('user_field_setting',function (Blueprint $table){
             $table->increments('id');
-            $table->boolean('active')->default(false);
+            $table->string('field');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateSliderTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('slider');
+        Schema::dropIfExists('user_field_setting');
     }
 }

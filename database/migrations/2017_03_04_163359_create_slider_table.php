@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLocalTable extends Migration
+class CreateSliderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateLocalTable extends Migration
      */
     public function up()
     {
-        Schema::create('local',function(Blueprint $table){
-           $table->increments('id');
-           $table->string('title');
-           $table->string('photo');
-           $table->text('description');
-           $table->text('urlmap');
-           $table->timestamps();
+        Schema::create('slider',function(Blueprint $table){
+            $table->increments('id');
+            $table->boolean('active')->default(true);
+            $table->timestamps();
         });
     }
 
@@ -30,6 +27,6 @@ class CreateLocalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('local');
+        Schema::dropIfExists('slider');
     }
 }

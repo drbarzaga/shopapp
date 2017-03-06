@@ -1,25 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace ShopApp\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class UserFieldSetting extends Model
 {
-    protected $table ='user_field_setting';
+    protected $table = 'user_field_setting';
 
     protected $fillable = [
-        'field'
+      'field'
     ];
 
     protected $hidden = [];
-
-    /**
-     * Get the user fields for the user field setting
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function userfields()
-    {
-        return $this->hasMany('App\Models\UserField');
-    }
 }

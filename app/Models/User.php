@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace ShopApp\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,7 +9,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'user';
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'password','role','active'
     ];
 
     /**
@@ -28,13 +28,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    /**
-     * Get the user fields for the user
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function userfields()
-    {
-        return $this->hasMany('App\Models\UserField');
-    }
 }

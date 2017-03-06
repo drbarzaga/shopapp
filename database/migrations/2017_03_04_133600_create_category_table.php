@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSliderPhotoTable extends Migration
+class CreateCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateSliderPhotoTable extends Migration
      */
     public function up()
     {
-        Schema::create('slider_photo',function(Blueprint $table){
+        Schema::create('category',function (Blueprint $table){
             $table->increments('id');
+            $table->string('title');
             $table->string('photo');
-            $table->integer('slider_id')->unsigned();
-            $table->foreign('slider_id')->references('id')->on('slider')->onDelete('cascade');
+            $table->boolean('active')->default(true);
+            $table->integer('parent')->unsigned()->nullable();
+            $table->foreign('parent')->references('id')->on('category')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +31,6 @@ class CreateSliderPhotoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('slider_photo');
+        Schema::dropIfExists('category');
     }
 }

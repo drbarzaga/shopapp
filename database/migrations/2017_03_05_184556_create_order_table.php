@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserFieldSettingTable extends Migration
+class CreateOrderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateUserFieldSettingTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_field_setting',function(Blueprint $table){
+        Schema::create('order',function (Blueprint $table){
             $table->increments('id');
-            $table->string('field');
+            $table->string('state');
+            $table->text('description');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +30,6 @@ class CreateUserFieldSettingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_field_setting');
+        Schema::dropIfExists('order');
     }
 }

@@ -1,15 +1,15 @@
 <?php
 
-namespace ShopApp\Models;
+namespace ShopApp;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class CarProduct extends Model
 {
     protected $table = 'category';
 
     protected $fillable = [
-      'title','photo','parent','active'
+        'count','product_id','car_id'
     ];
 
     protected $hidden = [];

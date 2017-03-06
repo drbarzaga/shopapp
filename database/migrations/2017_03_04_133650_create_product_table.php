@@ -13,13 +13,13 @@ class CreateProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('product',function(Blueprint $table){
-           $table->increments('id');
-           $table->string('title');
-           $table->boolean('highlighted')->default(false);
-           $table->integer('category_id')->unsigned();
-           $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
-           $table->timestamps();
+        Schema::create('product',function (Blueprint $table){
+            $table->increments('id');
+            $table->string('title');
+            $table->boolean('active')->default(true);
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

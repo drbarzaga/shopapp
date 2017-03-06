@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models;
+namespace ShopApp;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Local extends Model
 {
-    protected $table='local';
+    protected $table = 'local';
 
-    protected $fillable=[
-      'title','photo','description','urlmap'
+    protected $fillable = [
+        'title','photo','description','urlmap','active'
     ];
 
     protected $hidden=[];
