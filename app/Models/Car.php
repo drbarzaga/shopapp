@@ -13,4 +13,12 @@ class Car extends Model
     ];
 
     protected $hidden=[];
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function products(){
+        return $this->hasMany('App\Models\CarProduct');
+    }
 }

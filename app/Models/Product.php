@@ -40,4 +40,8 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\ProductField');
     }
+
+    public function car(){
+        return $this->hasMany('App\Models\CarProduct');
+    }
 }

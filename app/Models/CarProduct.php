@@ -13,4 +13,12 @@ class CarProduct extends Model
     ];
 
     protected $hidden = [];
+
+    public function car(){
+        return $this->belongsTo('App\Models\Car');
+    }
+
+    public function product(){
+        return $this->belongsTo('App\Models\Product');
+    }
 }
