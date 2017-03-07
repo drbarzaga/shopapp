@@ -23,26 +23,26 @@ class SliderRepository implements IRepository
 
     public function getAll()
     {
-
+        return $this->model->all();
     }
 
     public function getById($id)
     {
-        // TODO: Implement getById() method.
+        return $this->model->find($id);
     }
 
     public function create(array $attributes)
     {
-        // TODO: Implement create() method.
+        return $this->model->create($attributes);
     }
 
     public function update($id, array $attributes)
     {
-        // TODO: Implement update() method.
+        return $this->model->find($id)->update($attributes);
     }
 
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        return $this->model->find($id)->delete();
     }
 }

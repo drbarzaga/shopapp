@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Backend\Slider;
 
+use App\Repositories\SliderRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SliderController extends Controller
 {
-    public function __construct()
+    private $repository;
+
+    public function __construct(SliderRepository $repository)
     {
+        $this->repository = $repository;
     }
 
     public function index()

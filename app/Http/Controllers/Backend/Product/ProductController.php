@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Backend\Product;
 
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    private $repository;
+
+    public function __construct(ProductRepository $repository)
     {
+        $this->repository = $repository;
     }
 
     public function index()

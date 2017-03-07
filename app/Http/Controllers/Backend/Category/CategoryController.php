@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Backend\Category;
 
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-    public function __construct()
+    private $repository;
+
+    public function __construct(CategoryRepository $repository)
     {
+        $this->repository = $repository;
     }
 
     public function index()
