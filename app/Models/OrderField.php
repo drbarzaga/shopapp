@@ -13,4 +13,12 @@ class OrderField extends Model
     ];
 
     protected $hidden=[];
+
+    public function order(){
+        return $this->belongsTo('App\Models\Order');
+    }
+
+    public function field_setting(){
+        return $this->belongsTo('App\Models\OrderFieldSetting');
+    }
 }
