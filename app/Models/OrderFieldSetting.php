@@ -13,4 +13,8 @@ class OrderFieldSetting extends Model
     ];
 
     protected $hidden=[];
+
+    public function fields(){
+        return $this->hasMany('App\Models\OrderField');
+    }
 }
