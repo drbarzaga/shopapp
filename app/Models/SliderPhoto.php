@@ -13,4 +13,13 @@ class SliderPhoto extends Model
     ];
 
     protected $hidden = [];
+
+    /**
+     * Get the slider for this photo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function slider()
+    {
+        return $this->belongsTo('App\Models\Slider');
+    }
 }

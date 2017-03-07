@@ -13,4 +13,13 @@ class Slider extends Model
     ];
 
     protected $hidden = [];
+
+    /**
+     * Get all photos for this slider
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function photos()
+    {
+        return $this->hasMany('App\Models\SliderPhoto');
+    }
 }

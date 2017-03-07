@@ -16,7 +16,8 @@ class CreateProductTable extends Migration
         Schema::create('product',function (Blueprint $table){
             $table->increments('id');
             $table->string('title');
-            $table->boolean('active')->default(true);
+//            $table->boolean('active')->default(true);
+            $table->boolean('highlighted')->default(false); //Para marcar productos como destacados.
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
             $table->timestamps();
