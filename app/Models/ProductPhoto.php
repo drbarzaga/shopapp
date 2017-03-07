@@ -13,4 +13,13 @@ class ProductPhoto extends Model
     ];
 
     protected $hidden=[];
+
+    /**
+     * Get the product for this photo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product()
+    {
+        return $this->belongsTo('App\Models\Product');
+    }
 }

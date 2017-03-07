@@ -13,4 +13,13 @@ class Product extends Model
     ];
 
     protected $hidden=[];
+
+    /**
+     * Get photos for this product
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function photos()
+    {
+        return $this->hasMany('App\Models\ProductPhoto');
+    }
 }
