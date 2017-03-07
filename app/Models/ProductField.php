@@ -13,4 +13,17 @@ class ProductField extends Model
     ];
 
     protected $hidden = [];
+
+    /**
+     * Get the product for this field
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product(){
+        return $this->belongsTo('App\Models\Product');
+    }
+
+    public function field_setting()
+    {
+        return $this->belongsTo('App\Models\ProductFieldSetting');
+    }
 }

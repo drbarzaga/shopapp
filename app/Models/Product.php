@@ -22,4 +22,22 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\ProductPhoto');
     }
+
+    /**
+     * Get the category for this product
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
+
+    /**
+     * Get the fields for this product
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function fields()
+    {
+        return $this->hasMany('App\Models\ProductField');
+    }
 }

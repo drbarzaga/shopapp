@@ -13,4 +13,13 @@ class ProductFieldSetting extends Model
     ];
 
     protected $hidden = [];
+
+    /**
+     * Get the fields for this field setting
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function fields()
+    {
+        return $this->hasMany('App\Models\ProductField');
+    }
 }
