@@ -574,14 +574,14 @@ Route::group(['namespace'=>'Backend','prefix'=>'admin'],function (){
             /**
              * Route show form for edit local
              */
-            Route::get('edit',[
+            Route::get('{id}/edit',[
                 'as'=>'admin_local_edit',
                 'uses'=>'LocalController@edit'
             ]);
             /**
              * Route for update local
              */
-            Route::post('update',[
+            Route::post('update/{id}',[
                 'as'=>'admin_local_update',
                 'uses'=>'LocalController@update'
             ]);

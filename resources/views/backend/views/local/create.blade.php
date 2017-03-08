@@ -1,7 +1,5 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: dayan
- * Date: 04/03/2017
- * Time: 10:36 PM
- */
+{{ Html::ul($errors->all()) }}
+
+{{ Form::open(array('url' => 'admin/local/store', 'files'=>true)) }}
+@include ('backend.views.local.form')
+{{ Form::close() }}
