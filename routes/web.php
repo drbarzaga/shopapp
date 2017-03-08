@@ -588,7 +588,7 @@ Route::group(['namespace'=>'Backend','prefix'=>'admin'],function (){
             /**
              * Route for destroy local
              */
-            Route::post('destroy',[
+            Route::post('{id}/destroy',[
                 'as'=>'admin_local_destroy',
                 'uses'=>'LocalController@destroy'
             ]);

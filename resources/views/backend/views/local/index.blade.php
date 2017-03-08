@@ -23,7 +23,13 @@
             <td>Photo</td>
             <td>{{ $value->urlmap }}</td>
             <td>{{ $value->active }}</td>
-            <td>Actions</td>
+            <td>
+                <a class="btn btn-small btn-success" href="{{ URL::to('admin/local/' . $value->id . 'edit') }}">edit</a>
+
+                <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
+                <a class="btn btn-small btn-info" href="{{ URL::to('admin/local/' . $value->id . '/destroy') }}">delete</a>
+
+            </td>
         </tr>
     @endforeach
     </tbody>
