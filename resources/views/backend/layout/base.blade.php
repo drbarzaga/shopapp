@@ -71,7 +71,13 @@
       </ul>
     </li>
     <li id="menu_locals"><a href="/admin/local"><i class="icon icon-list-alt"></i> <span>Locales</span></a></li>
-
+    <li id="menu_pages" class="submenu"><a href="#"><i class="icon icon-file"></i> <span>Páginas</span></a>
+      <ul>
+        <li id="submenu_quienesS"><a href="gallery.html">Quienes somos</a></li>
+        <li id="submenu_conctatc"><a href="gallery.html">Contáctenos</a></li>
+        <li id="submenu_TrmyCon"><a href="gallery.html">Terminos y condiciones</a></li>
+      </ul>
+    </li>
 
   </ul>
 </div>

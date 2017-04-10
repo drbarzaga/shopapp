@@ -10,3 +10,10 @@
 <script src="{{asset('fronted/js/supersubs.js')}}"></script>
 <script src="{{asset('fronted/js/styleswitcher.js')}}"></script>
 <script src="{{asset('fronted/js/script.js')}}"></script>
+<script src="{{asset('js/vue2/vue.js')}}"></script>
+<script src="{{asset('js/axios/axios.js')}}"></script>
+<script type="text/javascript">
+  var APP_URL = "{!! url('/') !!}";
+  window.Shop = {baseUrl: '{!! url('/api/') !!}', csrfToken: '{{ csrf_token() }}'};
+</script>
+<script src="{{asset('fronted/scripts/template.js')}}"></script>

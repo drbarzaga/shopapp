@@ -2,6 +2,7 @@
 
 @section('content')
   {{--Slider--}}
+  <div id="dashboard">
   <div class="row">
     <div class="col-md-12">
       <div class="main-slider" id="main-slider">
@@ -112,29 +113,8 @@
         <div class="row">
           <div class="widget-categories col-md-4">
             <ul>
-              <li>
-                <a href="#">Categoria 1</a>
-              </li>
-              <li>
-                <a href="#">Categoria 2</a>
-              </li>
-              <li>
-                <a href="#">Categoria 3</a>
-              </li>
-              <li>
-                <a href="#">Categoria 4</a>
-              </li>
-              <li>
-                <a href="#">Categoria 5</a>
-              </li>
-              <li>
-                <a href="#">Categoria 6</a>
-              </li>
-              <li>
-                <a href="#">Categoria 7</a>
-              </li>
-              <li>
-                <a href="#">Categoria 8</a>
+              <li v-for="category in categories">
+                <a href="#">@{{category.title}}</a>
               </li>
             </ul>
           </div>
@@ -154,9 +134,9 @@
 
   </div>
   {{--Categorias & alertas end--}}
-
+  </div>
 @endsection
 
 @section('js')
-
+  <script src="{{asset('fronted/scripts/home.js')}}"></script>
 @endsection

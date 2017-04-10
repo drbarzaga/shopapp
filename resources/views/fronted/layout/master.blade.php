@@ -84,26 +84,8 @@
           <li>
             <a href="#">Categorias</a>
             <ul class="dropdown">
-              <li>
-                <a href="about.html">Categoria 1</a>
-              </li>
-              <li>
-                <a href="about.html">Categoria 2</a>
-              </li>
-              <li>
-                <a href="about.html">Categoria 3</a>
-              </li>
-              <li>
-                <a href="about.html">Categoria 4</a>
-              </li>
-              <li>
-                <a href="about.html">Categoria 5</a>
-              </li>
-              <li>
-                <a href="about.html">Categoria 6</a>
-              </li>
-              <li>
-                <a href="about.html">Categoria 7</a>
+              <li v-for="category in categories">
+                <a href="about.html">@{{ category.title }}</a>
               </li>
             </ul>
           </li>
@@ -142,6 +124,7 @@
 
 </div><!-- /.container -->
 <!-- Start Footer Section -->
+<div style="width: 100%">
 <div class="row">
   <div class="col-md-12">
     <div class="footer-section">
@@ -224,6 +207,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 <!-- End Copyright Section -->
 <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>

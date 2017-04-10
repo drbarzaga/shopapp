@@ -1,8 +1,8 @@
 /**
- * Created by rafa on 09/04/2017.
+ * Created by rafa on 10/04/2017.
  */
-var category = new Vue({
-  name: 'Category',
+var home = new Vue({
+  name: 'Home',
   data:{
     categories:[]
   },
@@ -11,7 +11,7 @@ var category = new Vue({
       var url=window.Shop.baseUrl+'/category';
       axios.get(url).then(function(response) {
         if(response.status==200 && response.data.status=="OK"){
-          category.categories=response.data.category;
+          home.categories=response.data.category;
         }
       });
     }
@@ -21,4 +21,4 @@ var category = new Vue({
   }
 });
 
-category.$mount('#category-container');
+home.$mount('#dashboard');

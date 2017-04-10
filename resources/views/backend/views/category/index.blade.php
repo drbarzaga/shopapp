@@ -12,18 +12,19 @@
       <table class="table table-bordered data-table">
         <thead>
         <tr>
-          <th>Titulo</th>
           <th>Foto</th>
-          <th>Padre</th>
-          <th>Acciones</th>
+          <th>Titulo</th>
+          <th width="10%">Acciones</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="category in categories">
-          <td>@{{ category.title }}</td>
           <td>@{{ category.photo }}</td>
-          <td><span v-if="category.parent">@{{ category.parent }}</span></td>
-          <td></td>
+          <td>@{{ category.title }}</td>
+          <td>
+            <a class="btn btn-info"><i class="icon icon-edit"></i></a>
+            <a class="btn btn-danger tip-bottom" title="Eliminar"><i class="icon icon-remove"></i></a>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -36,6 +37,7 @@
   <script src="{{asset('backend/js/jquery.dataTables.min.js')}}"></script>
   <script src="{{asset('backend/scripts/category.js')}}"></script>
   <script>
-    $("#menu_cat").addClass("active")
+    $("#menu_cat").addClass("active");
+
   </script>
 @endsection
