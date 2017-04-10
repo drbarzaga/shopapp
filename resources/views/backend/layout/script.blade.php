@@ -1,6 +1,7 @@
 <script src="{{asset('backend/js/excanvas.min.js')}}"></script>
 <script src="{{asset('backend/js/jquery.min.js')}}"></script>
 <script src="{{asset('backend/js/jquery.ui.custom.js')}}"></script>
+<script src="{{asset('backend/js/jquery.uniform.js')}}"></script>
 <script src="{{asset('backend/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('backend/js/jquery.flot.min.js')}}"></script>
 <script src="{{asset('backend/js/jquery.flot.resize.min.js')}}"></script>
@@ -12,4 +13,7 @@
 <script type="text/javascript">
   var APP_URL = "{!! url('/') !!}";
   window.Shop = {baseUrl: '{!! url('/api/') !!}', csrfToken: '{{ csrf_token() }}'};
+  Vue.directive('tip-bottom', function (el) {
+    $(el).tooltip({ placement: 'bottom' });
+  });
 </script>

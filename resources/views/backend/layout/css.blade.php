@@ -6,3 +6,4 @@
 <link rel="stylesheet" href="{{asset('backend/css/font-awesome.css')}}" />
 <link rel="stylesheet" href="{{asset('backend/font-awesome/css/font-awesome.css')}}" />
 <link rel="stylesheet" href="{{asset('backend/css/jquery.gritter.css')}}" />
+<link rel="stylesheet" href="{{asset('backend/css/uniform.css')}}" />
