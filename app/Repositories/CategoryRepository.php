@@ -44,4 +44,7 @@ class CategoryRepository implements IRepository
     {
         return $this->model->find($id)->delete();
     }
+    public function with(){
+      return $this->model->with('category');
+    }
 }

@@ -17,7 +17,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        dd('ADMIN/CATEGORY/LIST');
+      return view('backend.views.category.index');
     }
 
     public function create()

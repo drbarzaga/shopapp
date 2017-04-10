@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        dd('ADMIN/PRODUCT/LIST');
+        return view('backend.views.product.index');
     }
 
     public function create()

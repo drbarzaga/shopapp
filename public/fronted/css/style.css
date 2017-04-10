@@ -1630,6 +1630,10 @@ ul.post-meta li, ul.post-meta li a {
   -o-transition: all 0.2s ease-in-out;
 }
 
+.widget-categories ul li a:hover{
+  border-bottom: 1px solid #28ABE3;
+}
+
 .widget-categories ul li:first-child a {
   padding-top: 0;
 }
