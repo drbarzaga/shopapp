@@ -161,6 +161,11 @@ $(document).ready(function(){
 	$('#lightbox').live('click', function() { 
 		$('#lightbox').hide(200);
 	});
-	
-});
 
+	//prevent scroll modal open
+  $(".modal").on("show", function () {
+    $("body").addClass("modal-open");
+  }).on("hidden", function () {
+    $("body").removeClass("modal-open")
+  });
+});

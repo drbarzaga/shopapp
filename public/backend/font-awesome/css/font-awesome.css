@@ -1799,3 +1799,6 @@
 .fa-medium:before {
   content: "\f23a";
 }
+.fa-mouse-pointer::before {
+  content: "\f124";
+}

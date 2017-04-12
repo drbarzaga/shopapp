@@ -65,38 +65,35 @@
 
   <!-- Start Navigation Section -->
   <div class="navigation">
-
     <div id="navbar" class="navbar navbar-default navbar-top">
       <div class="navbar-header">
         <!-- Stat Toggle Nav Link For Mobiles -->
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <i class="fa fa-bars"></i>
         </button>
-
       </div>
       <div  class="navbar-collapse collapse" style="padding-left: 5px">
-
         <!-- Start Navigation List -->
         <ul class="nav navbar-nav">
           <li>
-            <a class="active" href="index.html">Inicio</a>
+            <a id="home" href="{{route('f_index')}}">Inicio</a>
           </li>
           <li>
             <a href="#">Categorias</a>
             <ul class="dropdown">
-              <li v-for="category in categories">
+              <li v-for="category in categories" v-if="!category.parent">
                 <a href="about.html">@{{ category.title }}</a>
               </li>
             </ul>
           </li>
           <li>
-            <a href="#">Quienes somos</a>
+            <a id="quienesSomos" href="{{route('f_quienesSomos')}}">Quienes somos</a>
           </li>
           <li>
-            <a href="#">Contáctenos</a>
+            <a id="contactenos" href="{{route('f_contactenos')}}">Contáctenos</a>
           </li>
           <li>
-            <a href="project-3-col.html">Terminos y condiciones</a>
+            <a id="termCond" href="{{route('f_term_cond')}}">Términos y condiciones</a>
           </li>
           <li>
             <a href="blog.html">Usuario</a>
@@ -119,18 +116,13 @@
 
   @yield('content')
 
-
-
-
 </div><!-- /.container -->
 <!-- Start Footer Section -->
 <div style="width: 100%">
 <div class="row">
   <div class="col-md-12">
     <div class="footer-section">
-
       <div class="row">
-
         <div class="col-md-3 col-sm-6">
           <div class="footer-address">
             <h3>Address</h3>
@@ -147,14 +139,11 @@
             </address>
           </div>
         </div>
-
         <div class="col-md-3 col-sm-6">
           <div class="footer-gallery">
             <h3>Photo Gallery</h3>
-
           </div>
         </div>
-
         <div class="col-md-3 col-sm-6">
           <div class="footer-link">
             <h3>Important Link</h3>
@@ -168,7 +157,6 @@
             </ul>
           </div>
         </div>
-
         <div class="col-md-3 col-sm-6">
           <div class="footer-social">
             <h3>Get In Touch</h3>

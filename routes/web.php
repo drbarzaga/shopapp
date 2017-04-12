@@ -16,6 +16,18 @@ Route::group(['namespace' => 'Frontend'], function () {
     'as' => 'f_index',
     'uses' => 'HomeController@index'
   ]);
+  Route::get('/quienes_somos', [
+    'as' => 'f_quienesSomos',
+    'uses' => 'HomeController@quienesSomos'
+  ]);
+  Route::get('/contactenos', [
+    'as' => 'f_contactenos',
+    'uses' => 'HomeController@contactenos'
+  ]);
+  Route::get('/term_cond', [
+    'as' => 'f_term_cond',
+    'uses' => 'HomeController@termCond'
+  ]);
 });
 
 
@@ -24,6 +36,45 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
     'as' => 'b_index',
     'uses' => 'BackendController@index'
   ]);
+  /**
+   * Routes dor static pages
+   */
+  Route::group(['namespace' => 'StaticPages'], function (){
+    Route::group(['prefix' => 'static'], function () {
+      Route::get('quienes_somos', [
+        'as' => 'quienes_somos',
+        'uses' => 'StaticPagesController@indexQuienesSomos'
+      ]);
+      Route::post('quienes_somos', [
+        'as' => 'quienes_somos_save',
+        'uses' => 'StaticPagesController@QuienesSomosSave'
+      ]);
+      Route::get('contactenos', [
+        'as' => 'contactenos',
+        'uses' => 'StaticPagesController@indexContactenos'
+      ]);
+      Route::post('contactenos', [
+        'as' => 'contactenos_save',
+        'uses' => 'StaticPagesController@contactenosSave'
+      ]);
+      Route::get('term_cond', [
+        'as' => 'term_cond',
+        'uses' => 'StaticPagesController@indexTermCond'
+      ]);
+      Route::post('term_cond', [
+        'as' => 'term_cond_save',
+        'uses' => 'StaticPagesController@termCondSave'
+      ]);
+      Route::post('img_upload', [
+        'as' => 'img_upload',
+        'uses' => 'StaticPagesController@imgUpload'
+      ]);
+      Route::post('img_delete', [
+        'as' => 'img_delete',
+        'uses' => 'StaticPagesController@imgDelete'
+      ]);
+    });
+  });
   /**
    * Routes for User namespace
    */
@@ -402,41 +453,6 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
         'as' => 'admin_category_list',
         'uses' => 'CategoryController@index'
       ]);
-      /**
-       * Route show form for create category
-       */
-      Route::get('create', [
-        'as' => 'admin_category_create',
-        'uses' => 'CategoryController@create'
-      ]);
-      /**
-       * Route for store category
-       */
-      Route::post('store', [
-        'as' => 'admin_category_store',
-        'uses' => 'CategoryController@store'
-      ]);
-      /**
-       * Route show form for edit category
-       */
-      Route::get('edit', [
-        'as' => 'admin_category_edit',
-        'uses' => 'CategoryController@edit'
-      ]);
-      /**
-       * Route for update category
-       */
-      Route::post('update', [
-        'as' => 'admin_category_update',
-        'uses' => 'CategoryController@update'
-      ]);
-      /**
-       * Route for destroy category
-       */
-      Route::post('destroy', [
-        'as' => 'admin_category_destroy',
-        'uses' => 'CategoryController@destroy'
-      ]);
     });
   });
 
@@ -624,35 +640,35 @@ Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {
        * Route show all categories resources
        */
       Route::get('/', [
-        'as' => 'admin_category_list',
+        'as' => 'api_category_list',
         'uses' => 'CategoryController@index'
       ]);
       /**
        * Route show specific category
        */
       Route::get('/{id}', [
-        'as' => 'admin_category_list',
+        'as' => 'api_category_show',
         'uses' => 'CategoryController@indexId'
       ]);
       /**
        * Route for create category
        */
       Route::post('/', [
-        'as' => 'admin_category_create',
+        'as' => 'api_category_create',
         'uses' => 'CategoryController@create'
       ]);
       /**
        * Route for edit category
        */
       Route::post('/{id}', [
-        'as' => 'admin_category_update',
+        'as' => 'api_category_update',
         'uses' => 'CategoryController@edit'
       ]);
       /**
        * Route for destroy category
        */
       Route::delete('/{id}', [
-        'as' => 'admin_category_destroy',
+        'as' => 'api_category_destroy',
         'uses' => 'CategoryController@destroy'
       ]);
     });

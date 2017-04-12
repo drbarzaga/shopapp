@@ -1118,38 +1118,7 @@ div.dataTables_wrapper .ui-widget-header {
 	cursor: pointer;
 	color: #777777;
 }
-/* Forms */
-form {
-	margin-bottom: 0;
-}
-.form-horizontal .control-group {
-	border-top: 1px solid #ffffff;
-	border-bottom: 1px solid #eeeeee;
-	margin-bottom: 0;
-}
-.form-horizontal .control-group:last-child {
-	border-bottom: 0;
-}
-.form-horizontal .control-label {
-	padding-top: 15px;
-	width: 180px;
-}
-.form-horizontal .controls {
-	margin-left: 200px;
-	padding: 10px 0;
-}
-.form-horizontal input[type=text], .form-horizontal input[type=password], .form-horizontal textarea {
-}
-.row-fluid .span20 {
-	width:97.8%
-}
-.form-horizontal .form-actions {
-	margin-top: 0;
-	margin-bottom: 0;
-}
-.help-block, .help-inline {
-	color: #999999;
-}
+
 /***********light-box***************/
 #lightbox {
 	position:fixed; /* keeps the lightbox window in the current viewport */
@@ -1584,4 +1553,17 @@ div.dataTables_wrapper .ui-widget-header {
 	text-align: center;
 }
 #sidebar .content{ display:none;}
+}
+.modal-open{
+	overflow: hidden;
+}
+
+.input-append input{
+width: 180px;
+}
+.input-append .add-on{
+	height: 18px;
+}
+.form-horizontal .help-inline{
+	display: block;
 }

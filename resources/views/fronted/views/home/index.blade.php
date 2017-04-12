@@ -12,7 +12,6 @@
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
           </ol>
-
           <!-- Wrapper for slides -->
           <div class="carousel-inner" role="listbox">
             <div class="item active">
@@ -113,7 +112,7 @@
         <div class="row">
           <div class="widget-categories col-md-4">
             <ul>
-              <li v-for="category in categories">
+              <li v-for="category in categories" v-if="!category.parent">
                 <a href="#">@{{category.title}}</a>
               </li>
             </ul>
@@ -139,4 +138,7 @@
 
 @section('js')
   <script src="{{asset('fronted/scripts/home.js')}}"></script>
+  <script>
+    $("#home").addClass("active");
+  </script>
 @endsection

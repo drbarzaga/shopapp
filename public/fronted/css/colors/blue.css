@@ -5,6 +5,7 @@
 
 .navbar-default .navbar-nav > li > a.active, .navbar-default .navbar-nav > li:hover > a {
 	background: #28ABE3;
+  /*border-bottom: 1px solid #28ABE3;*/
     color: #fff;
 }
 

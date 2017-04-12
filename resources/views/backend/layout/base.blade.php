@@ -60,8 +60,11 @@
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
   <ul>
     <li id="menu_inicio"><a href="/admin"><i class="icon icon-home"></i> <span>Inicio</span></a></li>
-    <li id="menu_cat"><a href="/admin/category"><i class="icon icon-list-alt"></i> <span>Categorias</span></a></li>
-    <li id="menu_product"><a href="/admin/product"><i class="icon icon-barcode"></i> <span>Productos</span></a></li>
+    <li id="menu_cat">
+      <a href="{{route('admin_category_list')}}">
+        <i class="icon icon-list-alt"></i> <span>Categorias</span></a>
+    </li>
+    <li id="menu_product"><a href="{{route('admin_product_list')}}"><i class="icon icon-barcode"></i> <span>Productos</span></a></li>
 
     <li id="menu_config" class="submenu"><a href="#"><i class="icon icon-cog"></i> <span>Configurar</span></a>
       <ul>
@@ -73,9 +76,9 @@
     <li id="menu_locals"><a href="/admin/local"><i class="icon icon-list-alt"></i> <span>Locales</span></a></li>
     <li id="menu_pages" class="submenu"><a href="#"><i class="icon icon-file"></i> <span>Páginas</span></a>
       <ul>
-        <li id="submenu_quienesS"><a href="gallery.html">Quienes somos</a></li>
-        <li id="submenu_conctatc"><a href="gallery.html">Contáctenos</a></li>
-        <li id="submenu_TrmyCon"><a href="gallery.html">Terminos y condiciones</a></li>
+        <li id="submenu_quienesS"><a href="{{route('quienes_somos')}}">Quienes somos</a></li>
+        <li id="submenu_conctatc"><a href="{{route('contactenos')}}">Contáctenos</a></li>
+        <li id="submenu_TrmyCon"><a href="{{route('term_cond')}}">Términos y condiciones</a></li>
       </ul>
     </li>
 

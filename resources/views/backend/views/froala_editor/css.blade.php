@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="{{asset('backend/froala/css/froala_editor.css')}}">
+<link rel="stylesheet" href="{{asset('backend/froala/css/froala_style.css')}}">
+<link rel="stylesheet" href="{{asset('backend/froala/css/plugins/code_view.css')}}">
+<link rel="stylesheet" href="{{asset('backend/froala/css/plugins/colors.css')}}">
+<link rel="stylesheet" href="{{asset('backend/froala/css/plugins/emoticons.css')}}">
+<link rel="stylesheet" href="{{asset('backend/froala/css/plugins/image.css')}}">
+<link rel="stylesheet" href="{{asset('backend/froala/css/plugins/line_breaker.css')}}">
+<link rel="stylesheet" href="{{asset('backend/froala/css/plugins/table.css')}}">
+<link rel="stylesheet" href="{{asset('backend/froala/css/plugins/char_counter.css')}}">
+<link rel="stylesheet" href="{{asset('backend/froala/css/plugins/fullscreen.css')}}">
+<link rel="stylesheet" href="{{asset('backend/froala/css/plugins/quick_insert.css')}}">
