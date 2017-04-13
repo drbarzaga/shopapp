@@ -112,7 +112,7 @@
         <div class="row">
           <div class="widget-categories col-md-4">
             <ul>
-              <li v-for="category in categories" v-if="!category.parent">
+              <li v-for="category in categories">
                 <a href="#">@{{category.title}}</a>
               </li>
             </ul>

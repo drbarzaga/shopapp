@@ -64,7 +64,8 @@
       <a href="{{route('admin_category_list')}}">
         <i class="icon icon-list-alt"></i> <span>Categorias</span></a>
     </li>
-    <li id="menu_product"><a href="{{route('admin_product_list')}}"><i class="icon icon-barcode"></i> <span>Productos</span></a></li>
+    <li id="menu_product"><a href="{{route('admin_product_list')}}"><i class="icon icon-barcode"></i>
+        <span>Productos</span></a></li>
 
     <li id="menu_config" class="submenu"><a href="#"><i class="icon icon-cog"></i> <span>Configurar</span></a>
       <ul>
@@ -89,18 +90,19 @@
 <!--main-container-part-->
 <div id="content">
   <!--breadcrumbs-->
-  <div id="content-header">
-    <div id="breadcrumb">
-      <a href="/admin">
-        <i class="icon-home"></i> Inicio
-      </a>
-      @yield('breadcrumb')
+    <div id="content-header">
+      <div id="breadcrumb">
+        <a href="/admin">
+          <i class="icon-home"></i> Inicio
+        </a>
+        @yield('breadcrumb')
+      </div>
+
     </div>
-  </div>
-  <!--End-breadcrumbs-->
-  <div class="container-fluid">
-    @yield('content')
-  </div>
+    <!--End-breadcrumbs-->
+    <div class="container-fluid">
+      @yield('content')
+    </div>
 </div>
 
 @include('backend.layout.script')

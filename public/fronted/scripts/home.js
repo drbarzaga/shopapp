@@ -8,7 +8,7 @@ var home = new Vue({
   },
   methods: {
     getData:function(){
-      var url=window.Shop.baseUrl+'/category';
+      var url=window.Shop.baseUrl+'/category/root';
       axios.get(url).then(function(response) {
         if(response.status==200 && response.data.status=="OK"){
           home.categories=response.data.category;
@@ -21,4 +21,4 @@ var home = new Vue({
   }
 });
 
-home.$mount('#dashboard');
+// home.$mount('#dashboard');

@@ -8,7 +8,7 @@ var template = new Vue({
   },
   methods: {
     getData:function(){
-      var url=window.Shop.baseUrl+'/category';
+      var url=window.Shop.baseUrl+'/category/root';
       axios.get(url).then(function(response) {
         if(response.status==200 && response.data.status=="OK"){
           template.categories=response.data.category;
@@ -21,5 +21,4 @@ var template = new Vue({
   }
 });
 
-template.$mount('#navbar');
-template.$mount('#dashboard');
+template.$mount('#templateVue');

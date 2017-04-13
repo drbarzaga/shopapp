@@ -18,27 +18,24 @@ class Category extends Model
      * Get the products for the category
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function products()
+    public function getProducts()
     {
       return $this->hasMany('App\Models\Product');
     }
-
     /**
      * Get parent for this Category
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function parent()
+    public function getParent()
     {
         return $this->belongsTo('App\Models\Category', 'parent');
     }
-
     /**
      * Get the categories childrens for this category
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function children()
+    public function getChildrens()
     {
         return $this->hasMany('App\Models\Category', 'parent');
     }
-
 }

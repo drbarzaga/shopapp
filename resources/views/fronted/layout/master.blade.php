@@ -18,7 +18,7 @@
 </head>
 
 <body>
-
+<div id="templateVue">
 <!-- car section
 ================================================== -->
 <div class="colors-switcher">
@@ -81,7 +81,7 @@
           <li>
             <a href="#">Categorias</a>
             <ul class="dropdown">
-              <li v-for="category in categories" v-if="!category.parent">
+              <li v-for="category in categories">
                 <a href="about.html">@{{ category.title }}</a>
               </li>
             </ul>
@@ -199,7 +199,7 @@
 </div>
 <!-- End Copyright Section -->
 <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
-
+</div>
 @include('fronted.layout.js')
 @yield('js')
 </body>

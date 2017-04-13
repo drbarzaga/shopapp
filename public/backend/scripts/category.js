@@ -5,30 +5,58 @@ var category = new Vue({
   name: 'Category',
   data: {
     categories: [],
-    newCategory: {title: '', parent: -1, foto: null}
+    allCategories: [],
+    breads:[],
+    select:-1
   },
   methods: {
     getData: function () {
-      var url = window.Shop.baseUrl + '/category';
+      var url = window.Shop.baseUrl + '/category/root';
       axios.get(url).then(function (response) {
         if (response.status == 200 && response.data.status == "OK") {
           category.categories = response.data.category;
+          category.breads=response.data.bread;
+          category.parentSelect=-1;
+          $("#parent").val(-1).trigger('change');
+          category.select=-1;
+        }
+
+      });
+      var url = window.Shop.baseUrl + '/category';
+      axios.get(url).then(function (response) {
+        if (response.status == 200 && response.data.status == "OK") {
+          category.allCategories = response.data.category;
+        }
+      });
+    },
+    getCategory: function(id){
+      var url = window.Shop.baseUrl + '/category/'+id;
+      axios.get(url).then(function (response) {
+        if (response.status == 200 && response.data.status == "OK") {
+          console.log(response.data);
+          category.categories = response.data.category.get_childrens;
+          category.breads=response.data.bread;
+          $("#parent").val(id).trigger('change');
+          category.select=id;
         }
       });
     },
     onFileChange: function (e) {
       var file = e.target.files || e.dataTransfer.files;
       $('#fotoText').val(file[0].name);
-    },
+    }
   },
   mounted: function () {
     this.getData();
   }
 });
 
-category.$mount('#category-container');
+category.$mount('#content');
 $(".modal").on("hidden", function () {
-  category.newCategory = {};
+  $(".control-group").removeClass('success');
+  $("#fotoText").val("");
+  $("#title").val("");
+  $("#parent").val(category.select).trigger('change');
 });
 
 $('#fotoBtn').focus(function () {
@@ -73,9 +101,16 @@ $("#categoryForm").validate({
     }
   },
   submitHandler: function () {
-    // console.log($("#categoryForm").serialize())
-    var formData = new FormData($("#categoryForm"));
-    console.log(formData)
+    var formData = new FormData();
+    formData.append("title",$("#title").val());
+    formData.append("parent",$("#parent").val());
+    formData.append("foto",document.getElementById('inputFoto').files[0]);
+    axios.post($('#urlCreate').val(),formData).then(function (res){
+      if(res.status==200 && res.data.status=="OK"){
+        category.categories.push(res.data.category);
+        $("#addCategory").modal("hide");
+      }
+    });
   }
 });
 

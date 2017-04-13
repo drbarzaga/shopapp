@@ -13,38 +13,39 @@ use App\Models\Category;
 
 class CategoryRepository implements IRepository
 {
-    private $model;
+  private $model;
 
-    public function __construct(Category $model)
-    {
-        $this->model = $model;
-    }
+  public function __construct(Category $model)
+  {
+    $this->model = $model;
+  }
 
-    public function getAll()
-    {
-        return $this->model->all();
-    }
+  public function getAll()
+  {
+    return $this->model->all();
+  }
+  public function getRoot(){
+    return $this->model->where('parent', null)->get();
+  }
+  public function getById($id)
+  {
+    return $this->model->find($id);
+  }
 
-    public function getById($id)
-    {
-        return $this->model->find($id);
-    }
+  public function create(array $attributes)
+  {
+    return $this->model->create($attributes);
+  }
 
-    public function create(array $attributes)
-    {
-        return $this->model->create($attributes);
-    }
+  public function update($id, array $attributes)
+  {
+    return $this->model->find($id)->update($attributes);
+  }
 
-    public function update($id, array $attributes)
-    {
-        return $this->model->find($id)->update($attributes);
-    }
+  public function delete($id)
+  {
+    return $this->model->find($id)->delete();
+  }
 
-    public function delete($id)
-    {
-        return $this->model->find($id)->delete();
-    }
-    public function with(){
-      return $this->model->with('category');
-    }
+
 }

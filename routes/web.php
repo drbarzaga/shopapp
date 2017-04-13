@@ -643,6 +643,10 @@ Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {
         'as' => 'api_category_list',
         'uses' => 'CategoryController@index'
       ]);
+      Route::get('/root', [
+        'as' => 'api_category_root_list',
+        'uses' => 'CategoryController@indexRoot'
+      ]);
       /**
        * Route show specific category
        */

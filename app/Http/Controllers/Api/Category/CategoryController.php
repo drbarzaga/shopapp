@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Api\Category;
 
+use App\Console\Commands\saveImage;
 use App\Repositories\CategoryRepository;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Exception;
+use Illuminate\Support\Facades\Input;
+use Intervention\Image\Facades\Image;
+
 
 class CategoryController extends Controller
 {
   private $repository;
-
+  private $bread;
   public function __construct(CategoryRepository $repository)
   {
     $this->repository = $repository;
@@ -18,28 +22,65 @@ class CategoryController extends Controller
   public function index()
   {
     $categories=$this->repository->getAll();
-//    dump($categories);
-//    die;
     return response()->json([
       'status' => 'OK',
       'category' => $categories
     ]);
   }
+  public function indexRoot()
+  {
+    $categories=$this->repository->getRoot();
+    foreach ($categories as $category) {
+      $childs=$category->getChildrens;
+    }
+    return response()->json([
+      'status' => 'OK',
+      'category' => $categories,
+      'bread' => []
+    ]);
+  }
   public function indexId($id)
   {
     $category=$this->repository->getById($id);
+    foreach($category->getChildrens as $children){
+      $childs=$children->getChildrens;
+    };
+    $this->bread=[];
+    $this->breads($category);
     return response()->json([
       'status' => 'OK',
-      'category' => $category
+      'category' => $category,
+      'bread' => $this->bread
     ]);
   }
   public function create()
   {
-    return response()->json([
-      'status' => 'post',
-      'method' => 'get',
-      'route' => 'create'
-    ]);
+    $title=Input::get('title');
+    $parent=Input::get('parent');
+    $category=["title"=>$title];
+    if($parent!=-1){
+      $category['parent']=$parent;
+    }
+    //upload IMAGE
+    $extension = Input::file('foto')->getClientOriginalExtension();
+    $photoName=md5(uniqid(rand(), true)) . '.' . $extension;
+    $dirName="uploads/Category/";
+    $image=Image::make(Input::file('foto'));
+    $this->dispatch(new saveImage($image,$dirName,$photoName));
+    $category['photo']=$photoName;
+    try{
+      $this->repository->create($category);
+      return response()->json([
+        'status' => 'OK',
+        'category' => $category
+      ]);
+    }catch (Exception $e){
+      return response()->json([
+        'status' => 'FAIL',
+        'message' => $e->message()
+      ]);
+    }
+
   }
 
   public function edit($id)
@@ -58,5 +99,14 @@ class CategoryController extends Controller
       'method' => 'delete',
       'route' => 'delete-'.$id
     ]);
+  }
+
+  private function breads($category){
+    if(!$category->getParent){
+      $this->bread[]=['title'=>$category->title,'id'=>$category->id];
+    }else{
+      $this->breads($category->getParent);
+      $this->bread[]=['title'=>$category->title,'id'=>$category->id];
+    }
   }
 }

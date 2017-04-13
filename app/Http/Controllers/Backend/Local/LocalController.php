@@ -54,6 +54,7 @@ class LocalController extends Controller
         //Input::file('photo')->move($destinationPath, $fileName); // uploading file to given path
         $folder='uploads/locals/';
         Image::make(Input::file('photo'))->resize(300, 200)->save($folder.'rafa.jpg');
+
         // sending back with message
         $local = $request->all();
         $local['photo'] = $fileName;

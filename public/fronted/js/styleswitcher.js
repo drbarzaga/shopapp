@@ -20,7 +20,6 @@ $(document).ready(function($) {
   $(window).scroll(function(){
     var yOffset = 160;
     var currYOffSet = $(this).scrollTop();
-    console.log(currYOffSet);
     if(yOffset < currYOffSet) {
       $("#navbar").addClass('navbar-fixed-top')
     }
