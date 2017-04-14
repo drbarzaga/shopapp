@@ -12,17 +12,20 @@ namespace App\Repositories;
 use App\Models\Product;
 use App\Models\ProductField;
 use App\Models\ProductFieldSetting;
+use App\Models\ProductPhoto;
 
 class ProductRepository implements IRepository
 {
   private $model;
   private $field;
   private $fieldSetting;
+  private $foto;
 
-  public function __construct(Product $model, ProductField $field, ProductFieldSetting $setting)
+  public function __construct(Product $model, ProductField $field, ProductFieldSetting $setting, ProductPhoto $foto)
   {
     $this->model = $model;
     $this->field = $field;
+    $this->foto = $foto;
     $this->fieldSetting = $setting;
   }
 
@@ -39,13 +42,15 @@ class ProductRepository implements IRepository
   public function create(array $attributes)
   {
     $product = $this->model->create($attributes);
-    foreach ($attributes['field'] as $attribute) {
-      $attribute=json_decode($attribute);
-      $this->field->create(['product_id'=>$product->id,'product_field_setting_id'=>$attribute->id,'value'=>$attribute->value]);
-    }
+    $this->addFieldValue($attributes['field'],$product->id);
     return $product;
   }
-
+  private function addFieldValue($fields,$id){
+    foreach ($fields as $attribute) {
+      $attribute=json_decode($attribute);
+      $this->field->create(['product_id'=>$id,'product_field_setting_id'=>$attribute->id,'value'=>$attribute->value]);
+    }
+  }
   public function update($id, array $attributes)
   {
     return $this->model->find($id)->update($attributes);
@@ -64,5 +69,8 @@ class ProductRepository implements IRepository
   public function createField(array $attributes)
   {
     return $this->fieldSetting->create($attributes);
+  }
+  public function addFoto(array $attributes){
+    return $this->foto->create($attributes);
   }
 }

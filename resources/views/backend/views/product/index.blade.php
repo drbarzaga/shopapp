@@ -5,6 +5,15 @@
 @endsection
 @section('css')
   <link rel="stylesheet" href="{{asset('backend/css/select2.css')}}"/>
+  <link rel="stylesheet" href="{{asset('backend/css/jquery.bxslider.css')}}"/>
+  <style>
+    .bx-controls{
+      display: none;
+    }
+    .bx-wrapper{
+     margin-bottom: 0;
+    }
+  </style>
 @endsection
 @section('content')
   <div id="addProduct" class="modal hide" data-keyboard="false" data-backdrop="static">
@@ -28,7 +37,7 @@
             <div class="control-group">
               <label class="control-label">Categoría</label>
               <div class="controls">
-                <select  name="category" id="category">
+                <select name="category" id="category">
                   <option v-for="category in categories" :value="category.id">@{{ category.title }}</option>
                 </select>
               </div>
@@ -61,7 +70,7 @@
                   <thead>
                   <tr>
                     <th width="20%">Foto</th>
-                    <th >Portada</th>
+                    <th>Portada</th>
                     <th width="10%">Acciones</th>
                   </tr>
                   </thead>
@@ -74,10 +83,10 @@
           </div>
         </div>
       </form>
-  </div>
-  <div class="modal-footer">
-    <a id="addProductBtn" class="btn btn-primary" href="javascript:;">Adicionar</a>
-    <a data-dismiss="modal" class="btn" href="#">Cancelar</a></div>
+    </div>
+    <div class="modal-footer">
+      <a id="addProductBtn" class="btn btn-primary" href="javascript:;">Adicionar</a>
+      <a data-dismiss="modal" class="btn" href="#">Cancelar</a></div>
   </div>
   <div class="widget-box">
     <div class="widget-title"><span class="icon"><i class="icon-list-alt"></i></span>
@@ -93,21 +102,29 @@
         <tr>
           <th width="4%"><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox"/></th>
           <th>Titulo</th>
-          <th>Foto</th>
+          <th width="10%">Foto</th>
           <th>Precio</th>
           <th v-for="field in fields">@{{field.field}}</th>
           <th width="13%">Acciones</th>
         </tr>
         </thead>
         <tbody>
-        {{--<tr v-for="field in fields">--}}
-        {{--<th><input type="checkbox"></th>--}}
-        {{--<td>@{{ field.field }}</td>--}}
-        {{--<td>--}}
-        {{--<a class="btn" v-tip-bottom title="Editar"><i style="color:#49AFCD" class="icon icon-edit"></i></a>--}}
-        {{--<a class="btn" v-tip-bottom title="Eliminar"><i style="color:#DA4F49" class="icon icon-remove"></i></a>--}}
-        {{--</td>--}}
-        {{--</tr>--}}
+        <tr v-for="product in products">
+          <th><input type="checkbox"></th>
+          <td>@{{ product.title }}</td>
+          <td>
+            <ul class="bxslider hide">
+              <li v-for="img in product.photos"><img class="img-responsive" :src="'{{asset('uploads/Product/thumbnail')}}/'+img.photo"/></li>
+            </ul>
+          </td>
+          <td>@{{ product.price }}</td>
+          <td v-for="field in fields">@{{ product.fields[field.id] }}</td>
+          <td>
+            <a class="btn" v-tip-bottom title="Mostrar"><i style="color:#000000" class="icon icon-eye-open"></i></a>
+            <a class="btn" v-tip-bottom title="Editar"><i style="color:#49AFCD" class="icon icon-edit"></i></a>
+            <a class="btn" v-tip-bottom title="Eliminar"><i style="color:#DA4F49" class="icon icon-remove"></i></a>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>
@@ -119,9 +136,11 @@
   <script src="{{asset('backend/js/jquery.dataTables.min.js')}}"></script>
   <script src="{{asset('backend/js/select2.min.js')}}"></script>
   <script src="{{asset('backend/js/jquery.validate.js')}}"></script>
+  <script src="{{asset('backend/js/jquery.bxslider.js')}}"></script>
   <script src="{{asset('backend/scripts/product.js')}}"></script>
   <script>
     $("#menu_product").addClass("active");
     $("select").select2();
+
   </script>
 @endsection

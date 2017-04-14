@@ -8,7 +8,7 @@ var product = new Vue({
     fields: [],
     fieldsData: {},
     products: [],
-    selected: -1
+    selected: -1,
   },
   methods: {
     getData: function () {
@@ -16,6 +16,19 @@ var product = new Vue({
       axios.get(url).then(function (response) {
         if (response.status == 200 && response.data.status == "OK") {
           product.fields = response.data.field;
+          var url = window.Shop.baseUrl + '/product';
+          axios.get(url).then(function (response) {
+            if (response.status == 200 && response.data.status == "OK") {
+              product.products=response.data.products;
+              setTimeout(function(){
+                $('.bxslider').removeClass("hide");
+                $('.bxslider').bxSlider({
+                  auto:true,
+                  pause:3000
+                });
+              });
+            }
+          })
         }
       });
       var url = window.Shop.baseUrl + '/category';
@@ -48,16 +61,16 @@ $("#addProductBtn").click(function () {
 
 $("#productForm").validate({
   rules: {
-    // title: {
-    //   required: true
-    // },
-    // category: {
-    //   required: true
-    // },
-    // price: {
-    //   required: true,
-    //   number: true
-    // }
+    title: {
+      required: true
+    },
+    category: {
+      required: true
+    },
+    price: {
+      required: true,
+      number: true
+    }
   },
   messages: {
     title: {
@@ -81,12 +94,14 @@ $("#productForm").validate({
     $(element).parents('.control-group').addClass('success');
   },
   submitHandler: function () {
-    console.log($(".fotoElement"));
-    return;
     var formData = new FormData();
     formData.append("title", $("#title").val());
     formData.append("price", $("#price").val());
     formData.append("category_id", $("#category").val());
+    $(".fotoElement").each(function (index, el) {
+      formData.append('fotos[]', el.files[0]);
+      console.log(el.files[0]);
+    });
     $(".field").each(function () {
       var element = $(this);
       formData.append("field[]", JSON.stringify({id: element.attr('data-id'), value: element.val()}));
@@ -98,14 +113,14 @@ $("#productForm").validate({
   }
 });
 
-$('#addFoto').click(function() {
-  var id=guid();
-  var input=$('<input/>').attr('id',id).attr('class','fotoElement').attr('type', 'file').attr('accept', 'image/*').on('change',function(e){
+$('#addFoto').click(function () {
+  var id = guid();
+  var input = $('<input/>').attr('id', id).attr('class', 'fotoElement').attr('type', 'file').attr('accept', 'image/*').on('change', function (e) {
     $('#fotoContainer').append(input);
     var reader = new FileReader();
     reader.onload = function (e) {
       $('#fotoShows').append(
-        '<tr><td><img class="img-responsive" src="'+e.target.result+'"/></td><td>Portada</td><td><a data-original-title="Eliminar" class="btn tip-bottom removeFoto" data-id="'+id+'"><i style="color: rgb(218, 79, 73);" class="icon icon-remove"></i></a></td></tr>'
+        '<tr><td><img class="img-responsive" src="' + e.target.result + '"/></td><td>Portada</td><td><a data-original-title="Eliminar" class="btn tip-bottom removeFoto" data-id="' + id + '"><i style="color: rgb(218, 79, 73);" class="icon icon-remove"></i></a></td></tr>'
       );
     };
     reader.readAsDataURL(e.target.files[0]);
@@ -124,8 +139,8 @@ function s4() {
     .substring(1);
 }
 
-$(".removeFoto").live('click',function(){
-  id=$(this).attr('data-id');
+$(".removeFoto").live('click', function () {
+  id = $(this).attr('data-id');
   $(this).parent().parent().remove();
-  $("#"+id).remove();
+  $("#" + id).remove();
 });

@@ -72,7 +72,6 @@ class CategoryController extends Controller
       $category=$this->repository->create($category);
       return response()->json([
         'status' => 'OK',
-        'category' => $category
       ]);
     }catch (Exception $e){
       return response()->json([

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use File;
 
 class saveImage extends Command
 {
@@ -49,6 +50,18 @@ class saveImage extends Command
     $height = $image->height();
     $width = $image->width();
     $ratio = $width / $height;
+    if(!File::exists($dirName.'thumbnail')){
+      File::makeDirectory($dirName.'thumbnail', 0775, true, true);
+    }
+    if(!File::exists($dirName.'small')){
+      File::makeDirectory($dirName.'small', 0775, true, true);
+    }
+    if(!File::exists($dirName.'medium')){
+      File::makeDirectory($dirName.'medium', 0775, true, true);
+    }
+    if(!File::exists($dirName.'large')){
+      File::makeDirectory($dirName.'large', 0775, true, true);
+    }
     if ($ratio < 1) {
       $image->resize(200, 200)->save($dirName . 'thumbnail/' . $photoName);
       $image->resize(400, 400 / $ratio)->save($dirName . 'small/' . $photoName);

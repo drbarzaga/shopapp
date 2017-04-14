@@ -19,8 +19,20 @@ class ProductController extends Controller
   }
 
   public function index(){
+    $products=$this->repository->getAll();
+    foreach ($products as $product) {
+      $product->photos;
+      $fields=$product->fields;
+      $pField=[];
+      foreach ($fields as $field) {
+        $pField[$field->product_field_setting_id]=$field->value;
+      }
+      unset($product->fields);
+      $product->fields=$pField;
+    }
     return response()->json([
-      'status'=>"OK"
+      'status'=>"OK",
+      'products'=>$products
     ]);
   }
 
@@ -30,10 +42,18 @@ class ProductController extends Controller
 
   public function create(){
     try{
+      $fotos=Input::file('fotos');
       $product=$this->repository->create(Input::all());
+      foreach ($fotos as $foto) {
+        $extension =$foto->getClientOriginalExtension();
+        $photoName=md5(uniqid(rand(), true)) . '.' . $extension;
+        $dirName="uploads/Product/";
+        $image=Image::make($foto);
+        $this->dispatch(new saveImage($image,$dirName,$photoName));
+        $this->repository->addFoto(["product_id"=>$product->id,"photo"=>$photoName]);
+      }
       return response()->json([
-        'status'=>"OK",
-        'product'=>$product
+        'status'=>"OK"
       ]);
     }catch (Exception $e){
       return response()->json([
