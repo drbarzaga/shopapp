@@ -57,7 +57,7 @@
 </div>
 <!--close-top-serch-->
 <!--sidebar-menu-->
-<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-cogs"></i> Opciones</a>
   <ul>
     <li id="menu_inicio"><a href="/admin"><i class="icon icon-home"></i> <span>Inicio</span></a></li>
     <li id="menu_cat">
@@ -69,7 +69,7 @@
 
     <li id="menu_config" class="submenu"><a href="#"><i class="icon icon-cog"></i> <span>Configurar</span></a>
       <ul>
-        <li id="submenu_field_product"><a href="gallery.html">Campos de producto</a></li>
+        <li id="submenu_field_product"><a href="{{route('admin_product_field')}}">Campos de producto</a></li>
         <li id="submenu_field_product"><a href="gallery.html">Campos de pedido</a></li>
         <li id="submenu_field_user"><a href="gallery.html">Campos de usuario</a></li>
       </ul>

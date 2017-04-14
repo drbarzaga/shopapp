@@ -30,10 +30,11 @@ var category = new Vue({
       });
     },
     getCategory: function(id){
+      if(id==category.select)
+        return;
       var url = window.Shop.baseUrl + '/category/'+id;
       axios.get(url).then(function (response) {
         if (response.status == 200 && response.data.status == "OK") {
-          console.log(response.data);
           category.categories = response.data.category.get_childrens;
           category.breads=response.data.bread;
           $("#parent").val(id).trigger('change');
@@ -59,7 +60,7 @@ $(".modal").on("hidden", function () {
   $("#parent").val(category.select).trigger('change');
 });
 
-$('#fotoBtn').focus(function () {
+$('#fotoBtn').click(function () {
   $('#inputFoto').click();
 });
 
@@ -107,7 +108,9 @@ $("#categoryForm").validate({
     formData.append("foto",document.getElementById('inputFoto').files[0]);
     axios.post($('#urlCreate').val(),formData).then(function (res){
       if(res.status==200 && res.data.status=="OK"){
-        category.categories.push(res.data.category);
+        if(res.data.category.parent==category.select || (category.select=-1 && res.data.category.parent=="")){
+          category.categories.push(res.data.category);
+        }
         $("#addCategory").modal("hide");
       }
     });

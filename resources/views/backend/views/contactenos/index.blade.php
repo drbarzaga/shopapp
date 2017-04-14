@@ -14,7 +14,6 @@
 @section('js')
   @include('backend.views.froala_editor.js')
   <script>
-    $('#menu_pages').addClass('open');
     $('#menu_pages').addClass('active');
     $('#submenu_conctatc').addClass('active');
     $("#guardar-1").on('click',function(){

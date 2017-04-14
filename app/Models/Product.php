@@ -9,7 +9,7 @@ class Product extends Model
     protected $table = 'product';
 
     protected $fillable = [
-      'title','category_id','active'
+      'title','category_id','active','price'
     ];
 
     protected $hidden=[];

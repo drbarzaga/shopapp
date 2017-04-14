@@ -69,7 +69,7 @@ class CategoryController extends Controller
     $this->dispatch(new saveImage($image,$dirName,$photoName));
     $category['photo']=$photoName;
     try{
-      $this->repository->create($category);
+      $category=$this->repository->create($category);
       return response()->json([
         'status' => 'OK',
         'category' => $category

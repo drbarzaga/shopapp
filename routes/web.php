@@ -39,7 +39,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
   /**
    * Routes dor static pages
    */
-  Route::group(['namespace' => 'StaticPages'], function (){
+  Route::group(['namespace' => 'StaticPages'], function () {
     Route::group(['prefix' => 'static'], function () {
       Route::get('quienes_somos', [
         'as' => 'quienes_somos',
@@ -245,40 +245,9 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
         'as' => 'admin_product_list',
         'uses' => 'ProductController@index'
       ]);
-      /**
-       * Route for show form for create product
-       */
-      Route::get('create', [
-        'as' => 'admin_user_product_create',
-        'uses' => 'ProductController@create'
-      ]);
-      /**
-       * Route for store product
-       */
-      Route::post('store', [
-        'as' => 'admin_product_store',
-        'uses' => 'ProductController@store'
-      ]);
-      /**
-       * Route show form for edit
-       */
-      Route::get('edit', [
-        'as' => 'admin_product_edit',
-        'uses' => 'ProductController@edit'
-      ]);
-      /**
-       * Route for update product
-       */
-      Route::post('update', [
-        'as' => 'admin_product_update',
-        'uses' => 'ProductController@update'
-      ]);
-      /**
-       * Route for destroy product
-       */
-      Route::post('destroy', [
-        'as' => 'admin_product_destroy',
-        'uses' => 'ProductController@destroy'
+      Route::get('/config', [
+        'as' => 'admin_product_field',
+        'uses' => 'ProductController@indexField'
       ]);
     });
     /**
@@ -286,50 +255,6 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
      * this section contains the routes for access to the
      * functions stores in ProductFieldSettingController
      */
-    Route::group(['prefix' => 'product/field/setting'], function () {
-      /**
-       * Route for show all product field setting resources
-       */
-      Route::get('list', [
-        'as' => 'admin_product_field_setting_list',
-        'uses' => 'ProductFieldSettingController@index'
-      ]);
-      /**
-       * Route for show form for create product field setting
-       */
-      Route::get('create', [
-        'as' => 'admin_user_product_field_setting_create',
-        'uses' => 'ProductFieldSettingController@create'
-      ]);
-      /**
-       * Route for store product field setting
-       */
-      Route::post('store', [
-        'as' => 'admin_product_field_setting_store',
-        'uses' => 'ProductFieldSettingController@store'
-      ]);
-      /**
-       * Route show form for edit
-       */
-      Route::get('edit', [
-        'as' => 'admin_product_field_setting_edit',
-        'uses' => 'ProductFieldSettingController@edit'
-      ]);
-      /**
-       * Route for update product field setting
-       */
-      Route::post('update', [
-        'as' => 'admin_product_field_setting_update',
-        'uses' => 'ProductFieldSettingController@update'
-      ]);
-      /**
-       * Route for destroy product field setting
-       */
-      Route::post('destroy', [
-        'as' => 'admin_product_field_setting_destroy',
-        'uses' => 'ProductFieldSettingController@destroy'
-      ]);
-    });
   });
 
   /**
@@ -625,10 +550,6 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
 
 
 Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {
-
-  /**
-   * Routes for Category namespace
-   */
   Route::group(['namespace' => 'Category'], function () {
     /**
      * User authenticate required for access in this section
@@ -676,5 +597,40 @@ Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {
         'uses' => 'CategoryController@destroy'
       ]);
     });
+  });
+  Route::group(['namespace' => 'Product'], function () {
+    Route::group(['prefix' => 'product'], function () {
+      Route::get('/field', [
+        'as' => 'api_product_field_list',
+        'uses' => 'ProductController@indexField'
+      ]);
+      Route::post('/field', [
+        'as' => 'api_product_field_create',
+        'uses' => 'ProductController@createField'
+      ]);
+      Route::get('/', [
+        'as' => 'api_product_list',
+        'uses' => 'ProductController@index'
+      ]);
+      Route::get('/{id}', [
+        'as' => 'api_product_show',
+        'uses' => 'ProductController@indexId'
+      ]);
+      Route::post('/', [
+        'as' => 'api_product_create',
+        'uses' => 'ProductController@create'
+      ]);
+      Route::post('/{id}', [
+        'as' => 'api_product_update',
+        'uses' => 'ProductController@edit'
+      ]);
+      Route::delete('/{id}', [
+        'as' => 'api_product_destroy',
+        'uses' => 'ProductController@destroy'
+      ]);
+
+    });
+
+
   });
 });

@@ -2,7 +2,7 @@
 
 @section('breadcrumb')
   <a href="javascript:;" :class="{ current: breads.length==0 }" v-on:click="getData()">Categorias</a>
-  <a v-for="bread in breads" v-on:click="getCategory(bread.id)" href="javascript:;"  >@{{ $index  }}</a>
+  <a v-for="(bread,index) in breads" :class="{ current: index==breads.length-1 }" v-on:click="getCategory(bread.id)" href="javascript:;"  >@{{ bread.title  }}</a>
 @endsection
 @section('css')
   <link rel="stylesheet" href="{{asset('backend/css/select2.css')}}"/>

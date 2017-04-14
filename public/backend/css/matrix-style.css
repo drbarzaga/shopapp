@@ -206,7 +206,6 @@ hr{ border-top-color:#dadada;}
 	position: absolute;
 	width: 100%;
 	margin-top: -38px;
-	z-index: 20;
 }
 #content-header h1 {
 	color: #555555;
@@ -1095,7 +1094,6 @@ div.dataTables_wrapper .ui-widget-header {
 	z-index: 999 !important;
 }
 .modal-header {
-	height: auto;
 	padding: 8px 15px 5px;
 }
 .modal-header h3 {
@@ -1526,6 +1524,7 @@ body {
 .container-fluid {
 	padding-left: 20px;
 	padding-right: 20px;
+	padding-top: 30px;
 }
 #search {
 	display: none;
@@ -1566,4 +1565,10 @@ width: 180px;
 }
 .form-horizontal .help-inline{
 	display: block;
+}
+#addProduct .modal-header {
+	padding: 8px 15px 0px;
+}
+.modal-header .nav-tabs{
+	border-bottom: none;
 }
