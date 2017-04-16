@@ -45,7 +45,7 @@ class ProductRepository implements IRepository
     $this->addFieldValue($attributes['field'],$product->id);
     return $product;
   }
-  private function addFieldValue($fields,$id){
+  public function addFieldValue($fields,$id){
     foreach ($fields as $attribute) {
       $attribute=json_decode($attribute);
       $this->field->create(['product_id'=>$id,'product_field_setting_id'=>$attribute->id,'value'=>$attribute->value]);

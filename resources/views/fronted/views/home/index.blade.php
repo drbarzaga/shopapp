@@ -107,24 +107,24 @@
 
   {{--Categorias & alertas--}}
   <div class="row">
-    <div class="col-md-7 col-sm-7">
+    <div class="col-md-6 col-sm-6">
       <div class="default-page">
         <div class="row">
-          <div class="widget-categories col-md-4">
+          <div class="widget-categories col-md-6">
             <ul>
-              <li v-for="category in categories">
-                <a href="#">@{{category.title}}</a>
+              <li v-for="(category,index) in categories">
+                <a :href="categoryURL(category.id)" :class="{activeIndex:index==activeIndex}" v-on:mouseover="categoryOver(category.photo,index)">@{{category.title}}</a>
               </li>
             </ul>
           </div>
-          <div class="col-md-8">
-            A medida que va pasando porensima de cada categoria, se muestra la foto de la misma e imagenes de varios de productos y las subcatgorias que presenta
+          <div class="col-md-6">
+            <img class="img-responsive" :src="'{{asset('uploads/Category/small')}}/'+selectImg">
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-md-5 col-sm-5">
+    <div class="col-md-6 col-sm-6">
       <div class="default-page">
         <h3 class="section-title">Alertas</h3>
       </div>

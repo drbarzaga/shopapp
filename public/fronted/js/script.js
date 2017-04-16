@@ -260,7 +260,6 @@ $(document).ready(function ($) {
     cursorwidth: 5,
     cursorborder: 0,
     cursorcolor: '#333',
-    autohidemode: false,
     zindex: 999999999,
     horizrailenabled: false,
     cursorborderradius: 0

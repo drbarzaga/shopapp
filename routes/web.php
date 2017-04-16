@@ -28,6 +28,14 @@ Route::group(['namespace' => 'Frontend'], function () {
     'as' => 'f_term_cond',
     'uses' => 'HomeController@termCond'
   ]);
+  Route::get('/category/{id}', [
+    'as' => 'f_category',
+    'uses' => 'HomeController@category'
+  ]);
+  Route::get('/product/{id}', [
+    'as' => 'f_product',
+    'uses' => 'HomeController@product'
+  ]);
 });
 
 
@@ -634,3 +642,7 @@ Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {
 
   });
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

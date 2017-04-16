@@ -43,8 +43,17 @@ class CategoryController extends Controller
   {
     $category=$this->repository->getById($id);
     foreach($category->getChildrens as $children){
-      $childs=$children->getChildrens;
+      $children->getChildrens;
     };
+    foreach ($category->Products as $product) {
+      $product->photos;
+      $pField=[];
+      foreach ($product->fields as $field) {
+        $pField[$field->product_field_setting_id]=$field->value;
+      }
+      unset($product->fields);
+      $product->fields=$pField;
+    }
     $this->bread=[];
     $this->breads($category);
     return response()->json([

@@ -20,8 +20,8 @@
     <div class="modal-header">
       <button data-dismiss="modal" class="close" type="button">×</button>
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#tab1">Producto</a></li>
-        <li><a data-toggle="tab" href="#tab2">Fotos</a></li>
+        <li class="active"><a data-toggle="tab" did="defaultTab" data-target="#tab1">Producto</a></li>
+        <li><a data-toggle="tab" data-target="#tab2">Fotos</a></li>
       </ul>
     </div>
     <div class="modal-body">
@@ -29,7 +29,7 @@
         <div class="tab-content">
           <div id="tab1" class="tab-pane active">
             <div class="control-group">
-              <label class="control-label">Titulo</label>
+              <label class="control-label">Nombre</label>
               <div class="controls">
                 <input name="title" id="title" type="text">
               </div>
@@ -101,8 +101,8 @@
         <thead>
         <tr>
           <th width="4%"><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox"/></th>
-          <th>Titulo</th>
           <th width="10%">Foto</th>
+          <th>Nombre</th>
           <th>Precio</th>
           <th v-for="field in fields">@{{field.field}}</th>
           <th width="13%">Acciones</th>
@@ -111,12 +111,12 @@
         <tbody>
         <tr v-for="product in products">
           <th><input type="checkbox"></th>
-          <td>@{{ product.title }}</td>
           <td>
-            <ul class="bxslider hide">
+            <ul v-if="product.photos.length>0" class="bxslider hide">
               <li v-for="img in product.photos"><img class="img-responsive" :src="'{{asset('uploads/Product/thumbnail')}}/'+img.photo"/></li>
             </ul>
           </td>
+          <td>@{{ product.title }}</td>
           <td>@{{ product.price }}</td>
           <td v-for="field in fields">@{{ product.fields[field.id] }}</td>
           <td>
@@ -129,7 +129,6 @@
       </table>
     </div>
   </div>
-
 @endsection
 
 @section('js')
@@ -140,7 +139,6 @@
   <script src="{{asset('backend/scripts/product.js')}}"></script>
   <script>
     $("#menu_product").addClass("active");
-    $("select").select2();
 
   </script>
 @endsection

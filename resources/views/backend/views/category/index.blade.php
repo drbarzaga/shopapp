@@ -60,7 +60,7 @@
           <thead>
           <tr>
             <th width="4%"><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox"/></th>
-            <th>Foto</th>
+            <th width="10%">Foto</th>
             <th>Titulo</th>
             <th width="13%">Acciones</th>
           </tr>
@@ -68,7 +68,7 @@
           <tbody>
           <tr v-for="category in categories">
             <th><input type="checkbox"></th>
-            <td>@{{ category.photo }}</td>
+            <td><img class="img-responsive" :src="'{{asset('uploads/Category/thumbnail')}}/'+category.photo"></td>
             <td>@{{ category.title }}</td>
             <td>
               <a :class="{ hide: category.get_childrens==0 }" v-on:click="getCategory(category.id)" class="btn" v-tip-bottom title="Mostrar"><i style="color:#000000" class="icon icon-eye-open"></i></a>

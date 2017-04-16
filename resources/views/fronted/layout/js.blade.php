@@ -1,4 +1,5 @@
 <script src="{{asset('fronted/js/jquery-2.1.1.min.js')}}"></script>
+<script src="{{asset('fronted/js/jquery-ui.js')}}"></script>
 <script src="{{asset('fronted/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('fronted/js/modernizr.custom.js')}}"></script>
 <script src="{{asset('fronted/js/owl.carousel.min.js')}}"></script>
@@ -12,8 +13,11 @@
 <script src="{{asset('fronted/js/script.js')}}"></script>
 <script src="{{asset('js/vue2/vue.js')}}"></script>
 <script src="{{asset('js/axios/axios.js')}}"></script>
+<script src="{{asset('fronted/js/bootstrap.touchspin.js')}}"></script>
 <script type="text/javascript">
-  var APP_URL = "{!! url('/') !!}";
   window.Shop = {baseUrl: '{!! url('/api/') !!}', csrfToken: '{{ csrf_token() }}'};
+  window.baseURL = "{{url('/')}}";
+  Vue.directive('tip-bottom', function (el) {
+    $(el).tooltip({ placement: 'bottom' });
+  });
 </script>
-<script src="{{asset('fronted/scripts/template.js')}}"></script>

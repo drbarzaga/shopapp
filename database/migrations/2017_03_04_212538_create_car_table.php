@@ -16,7 +16,7 @@ class CreateCarTable extends Migration
         Schema::create('car',function (Blueprint $table){
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

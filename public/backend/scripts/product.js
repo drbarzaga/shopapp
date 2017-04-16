@@ -8,7 +8,7 @@ var product = new Vue({
     fields: [],
     fieldsData: {},
     products: [],
-    selected: -1,
+    selected: -1
   },
   methods: {
     getData: function () {
@@ -19,12 +19,12 @@ var product = new Vue({
           var url = window.Shop.baseUrl + '/product';
           axios.get(url).then(function (response) {
             if (response.status == 200 && response.data.status == "OK") {
-              product.products=response.data.products;
-              setTimeout(function(){
+              product.products = response.data.products;
+              setTimeout(function () {
                 $('.bxslider').removeClass("hide");
                 $('.bxslider').bxSlider({
-                  auto:true,
-                  pause:3000
+                  auto: true,
+                  pause: 3000
                 });
               });
             }
@@ -35,8 +35,12 @@ var product = new Vue({
       axios.get(url).then(function (response) {
         if (response.status == 200 && response.data.status == "OK") {
           product.categories = response.data.category;
-          product.selected = product.categories[0].id;
-          console.log(product.selected);
+          product.selected = response.data.category[0].id;
+          setTimeout(function(){
+            $("select").select2({
+              placeholder: 'Select an option'
+            });
+          })
         }
       });
     }
@@ -48,11 +52,14 @@ var product = new Vue({
 
 product.$mount("#content");
 
-$(".modal").on("show", function () {
-  $("#category").val(product.selected).trigger('change');
-});
 $(".modal").on("hidden", function () {
-
+  $("#fotoShows").html("");
+  $("#fotoContainer").html("");
+  $(".nav-tabs li").removeClass("active");
+  $(".nav-tabs li").first().addClass("active");
+  $(".tab-pane").removeClass("active");
+  $(".tab-pane").first().addClass("active");
+  $("#category").val(product.selected).trigger('change');
 });
 
 $("#addProductBtn").click(function () {
@@ -95,12 +102,12 @@ $("#productForm").validate({
   },
   submitHandler: function () {
     var formData = new FormData();
+    var category = $("#category").val();
     formData.append("title", $("#title").val());
     formData.append("price", $("#price").val());
-    formData.append("category_id", $("#category").val());
+    formData.append("category_id", category);
     $(".fotoElement").each(function (index, el) {
       formData.append('fotos[]', el.files[0]);
-      console.log(el.files[0]);
     });
     $(".field").each(function () {
       var element = $(this);
@@ -108,11 +115,12 @@ $("#productForm").validate({
     });
     axios.post($('#urlCreate').val(), formData).then(function (res) {
       if (res.status == 200 && res.data.status == "OK") {
+        product.getData();
+        $("#addProduct").modal("hide");
       }
     });
   }
 });
-
 $('#addFoto').click(function () {
   var id = guid();
   var input = $('<input/>').attr('id', id).attr('class', 'fotoElement').attr('type', 'file').attr('accept', 'image/*').on('change', function (e) {
@@ -126,19 +134,15 @@ $('#addFoto').click(function () {
     reader.readAsDataURL(e.target.files[0]);
   }).click();
 });
-
-
 function guid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
     s4() + '-' + s4() + s4() + s4();
 }
-
 function s4() {
   return Math.floor((1 + Math.random()) * 0x10000)
     .toString(16)
     .substring(1);
 }
-
 $(".removeFoto").live('click', function () {
   id = $(this).attr('data-id');
   $(this).parent().parent().remove();

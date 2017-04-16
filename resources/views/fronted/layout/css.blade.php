@@ -1,5 +1,8 @@
 {{--<link rel="stylesheet" href="{{asset('lib/bootstrap/css/bootstrap.css')}}">--}}
 <!-- Bootstrap CSS  -->
+<link href="{{asset('fronted/css/jquery-ui.css')}}" rel="stylesheet"/>
+
+
 <link rel="stylesheet" href="{{asset('fronted/css/bootstrap.css')}}" type="text/css">
 
 <!-- Font Awesome CSS -->
@@ -33,3 +36,4 @@
 
 <!-- Css3 Transitions Styles  -->
 <link rel="stylesheet" type="text/css" href="{{asset('fronted/css/animate.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('fronted/css/bootstrap.touchspin.css')}}">

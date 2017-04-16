@@ -17,6 +17,16 @@ class HomeController extends Controller
     return view('fronted.views.home.index');
   }
 
+  public function category($id)
+  {
+    return view('fronted.views.category.index')
+      ->with('category', $id);
+  }
+  public function product($id)
+  {
+    return view('fronted.views.product.index')
+      ->with('product', $id);
+  }
   public function quienesSomos()
   {
     $content=file_get_contents(storage_path('static_pages/quienes_somos.static'));

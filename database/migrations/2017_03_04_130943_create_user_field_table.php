@@ -17,7 +17,7 @@ class CreateUserFieldTable extends Migration
             $table->increments('id');
             $table->string('value');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('user_field_setting_id')->unsigned();
             $table->foreign('user_field_setting_id')->references('id')->on('user_field_setting')->onDelete('cascade');
             $table->timestamps();

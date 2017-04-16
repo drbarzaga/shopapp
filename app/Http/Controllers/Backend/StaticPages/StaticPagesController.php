@@ -7,7 +7,6 @@ use Faker\Provider\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
-
 class StaticPagesController extends Controller
 {
 

@@ -63,15 +63,15 @@ class saveImage extends Command
       File::makeDirectory($dirName.'large', 0775, true, true);
     }
     if ($ratio < 1) {
-      $image->resize(200, 200)->save($dirName . 'thumbnail/' . $photoName);
-      $image->resize(400, 400 / $ratio)->save($dirName . 'small/' . $photoName);
-      $image->resize(800, 800 / $ratio)->save($dirName . 'medium/' . $photoName);
-      $image->resize(1600, 1600 / $ratio)->save($dirName . 'large/' . $photoName);
+      $image->resize(1600, 1600 / $ratio)->save($dirName . 'large/' . $photoName,100);
+      $image->resize(800, 800 / $ratio)->save($dirName . 'medium/' . $photoName,100);
+      $image->resize(400, 400 / $ratio)->save($dirName . 'small/' . $photoName,100);
+      $image->resize(200, 200)->save($dirName . 'thumbnail/' . $photoName,100);
     } else {
-      $image->resize(200, 200)->save($dirName . 'thumbnail/' . $photoName);
-      $image->resize(400 * $ratio, 400)->save($dirName . 'small/' . $photoName);
-      $image->resize(800 * $ratio, 800)->save($dirName . 'medium/' . $photoName);
-      $image->resize(1600 * $ratio, 1600)->save($dirName . 'large/' . $photoName);
+      $image->resize(1600 * $ratio, 1600)->save($dirName . 'large/' . $photoName,100);
+      $image->resize(800 * $ratio, 800)->save($dirName . 'medium/' . $photoName,100);
+      $image->resize(400 * $ratio, 400)->save($dirName . 'small/' . $photoName,100);
+      $image->resize(200, 200)->save($dirName . 'thumbnail/' . $photoName,100);
     }
   }
 }

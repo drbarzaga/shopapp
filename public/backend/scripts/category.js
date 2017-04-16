@@ -108,7 +108,6 @@ $("#categoryForm").validate({
     formData.append("foto",document.getElementById('inputFoto').files[0]);
     axios.post($('#urlCreate').val(),formData).then(function (res){
       if(res.status==200 && res.data.status=="OK"){
-        var parent=res.data.category.parent;
         if(category.select==-1){
           category.getData();
         }else{
