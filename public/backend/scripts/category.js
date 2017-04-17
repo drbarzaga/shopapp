@@ -6,39 +6,39 @@ var category = new Vue({
   data: {
     categories: [],
     allCategories: [],
-    breads:[],
-    select:-1
+    breads: [],
+    select: -1
   },
   methods: {
     getData: function () {
       var url = window.Shop.baseUrl + '/category/root';
-      axios.get(url).then(function (response) {
+      this.$http.get(url).then(function (response) {
         if (response.status == 200 && response.data.status == "OK") {
-          category.categories = response.data.category;
-          category.breads=response.data.bread;
-          category.parentSelect=-1;
+          this.categories = response.data.category;
+          this.breads = response.data.bread;
+          this.parentSelect = -1;
           $("#parent").val(-1).trigger('change');
-          category.select=-1;
+          this.select = -1;
         }
 
       });
       var url = window.Shop.baseUrl + '/category';
-      axios.get(url).then(function (response) {
+      this.$http.get(url).then(function (response) {
         if (response.status == 200 && response.data.status == "OK") {
-          category.allCategories = response.data.category;
+          this.allCategories = response.data.category;
         }
       });
     },
-    getCategory: function(id){
-      if(id==category.select)
+    getCategory: function (id) {
+      if (id == category.select)
         return;
-      var url = window.Shop.baseUrl + '/category/'+id;
-      axios.get(url).then(function (response) {
+      var url = window.Shop.baseUrl + '/category/' + id;
+      this.$http.get(url).then(function (response) {
         if (response.status == 200 && response.data.status == "OK") {
-          category.categories = response.data.category.get_childrens;
-          category.breads=response.data.bread;
+          this.categories = response.data.category.get_childrens;
+          this.breads = response.data.bread;
           $("#parent").val(id).trigger('change');
-          category.select=id;
+          this.select = id;
         }
       });
     },
@@ -103,14 +103,14 @@ $("#categoryForm").validate({
   },
   submitHandler: function () {
     var formData = new FormData();
-    formData.append("title",$("#title").val());
-    formData.append("parent",$("#parent").val());
-    formData.append("foto",document.getElementById('inputFoto').files[0]);
-    axios.post($('#urlCreate').val(),formData).then(function (res){
-      if(res.status==200 && res.data.status=="OK"){
-        if(category.select==-1){
+    formData.append("title", $("#title").val());
+    formData.append("parent", $("#parent").val());
+    formData.append("foto", document.getElementById('inputFoto').files[0]);
+    category.$http.post($('#urlCreate').val(), formData).then(function (res) {
+      if (res.status == 200 && res.data.status == "OK") {
+        if (category.select == -1) {
           category.getData();
-        }else{
+        } else {
           category.getCategory(category.select);
         }
         $("#addCategory").modal("hide");

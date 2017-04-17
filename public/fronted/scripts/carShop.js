@@ -19,19 +19,19 @@ var car = new Vue({
   },
   methods: {
     getData: function () {
-      axios.get(window.Shop.baseUrl + '/car').then(function (data) {
+      this.$http.get(window.Shop.baseUrl + '/car').then(function (data) {
         if (data.status == 200 && data.data.status == "OK") {
-          car.car = data.data.car;
-          car.refreshData()
+          this.car = data.data.car;
+          this.refreshData()
         }
       })
     },
     refreshData: function () {
       var ammount = 0;
-      car.car.forEach(function (item) {
+      this.car.forEach(function (item) {
         ammount += item.product.price * item.cant;
       });
-      car.subTotal = ammount;
+      this.subTotal = ammount;
     }
   },
   mounted: function () {
@@ -41,9 +41,9 @@ var car = new Vue({
 
 $("body").on('click', '.addCarFast', function () {
   var productId = $(this).attr('data-id');
-  axios.post(window.Shop.baseUrl + '/car', {cant: 1, product: productId}).then(function (data) {
+  car.$http.post(window.Shop.baseUrl + '/car', {cant: 1, product: productId}).then(function (data) {
     if (data.status == 200 && data.data.status == "OK") {
-       $("#productFast"+productId).effect( "transfer", { to: $("#show-panel") }, 1000 );
+      $("#productFast" + productId).effect("transfer", {to: $("#show-panel")}, 500);
       car.car = data.data.car;
       car.refreshData()
     }
@@ -51,17 +51,65 @@ $("body").on('click', '.addCarFast', function () {
 });
 
 $("body").on('click', '#addCar', function () {
-  console.log("asd")
   var productId = $(this).attr('data-id');
   var target = $(this).attr('data-target');
   var cant = $("#product-quantity").val();
   $("#product-quantity").val(1);
-  axios.post(window.Shop.baseUrl + '/car', {cant: cant, product: productId}).then(function (data) {
-    if(data.status==200 && data.data.status=="OK"){
-      $(target).effect( "transfer", { to: $("#show-panel") }, 1000 );
-      car.car=data.data.car;
+  car.$http.post(window.Shop.baseUrl + '/car', {cant: cant, product: productId}).then(function (data) {
+    if (data.status == 200 && data.data.status == "OK") {
+      $(target).effect("transfer", {to: $("#show-panel")}, 500);
+      car.car = data.data.car;
       car.refreshData()
     }
   })
+});
 
+$("body").on('click', '.removeProductCar', function () {
+  var index = $(this).attr('data-index');
+  car.$http.delete(window.Shop.baseUrl + '/car/'+index).then(function (data) {
+    if (data.status == 200 && data.data.status == "OK") {
+      car.car = data.data.car;
+      car.refreshData()
+    }
+  })
+});
+
+$("body").on('click', '.refreshProductCar', function () {
+  var id = $(this).attr('data-index');
+  var cant = $("#price"+id).val();
+  car.$http.post(window.Shop.baseUrl + '/car/'+id, {cant: cant}).then(function (data) {
+    if (data.status == 200 && data.data.status == "OK") {
+      car.car = data.data.car;
+      car.refreshData()
+    }
+  })
+});
+
+$("#clearCar").click(function () {
+  car.$http.delete(window.Shop.baseUrl + '/car/all').then(function (data) {
+    if (data.status == 200 && data.data.status == "OK") {
+      car.car = data.data.car;
+      car.refreshData()
+    }
+  })
+});
+
+$(".modal").on("show.bs.modal", function () {
+  $("html").getNiceScroll().remove();
+});
+
+$(".modal").on("hide.bs.modal", function () {
+  $('.item-price').each(function (index, el) {
+    $(el).val($(el).attr('data-default'))
+  });
+  $("html").niceScroll({
+    scrollspeed: 100,
+    mousescrollstep: 38,
+    cursorwidth: 5,
+    cursorborder: 0,
+    cursorcolor: '#333',
+    zindex: 999999999,
+    horizrailenabled: false,
+    cursorborderradius: 0
+  });
 });

@@ -9,9 +9,9 @@ var porductField = new Vue({
   methods: {
     getData: function () {
       var url = window.Shop.baseUrl + '/product/field';
-      axios.get(url).then(function (response) {
+      this.$http.get(url).then(function (response) {
         if (response.status == 200 && response.data.status == "OK") {
-          porductField.fields=response.data.field;
+          this.fields=response.data.field;
         }
 
       });
@@ -49,7 +49,7 @@ $("#fieldForm").validate({
   submitHandler: function () {
     var url = $("#urlCreate").val();
     var field = $("#title").val();
-    axios.post(url,{field:field}).then(function (res) {
+    porductField.$http.post(url,{field:field}).then(function (res) {
       porductField.fields.push(res.data.field);
       $("#addField").modal('hide');
     })

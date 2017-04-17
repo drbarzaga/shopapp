@@ -17,12 +17,12 @@ class CarController extends Controller
   public function userCar()
   {
 
-    if (Auth::guest()) {
+//    if (Auth::guest()) {
       $car = request()->session()->get('car', []);
-     } else {
-      dump(Auth::user()->car);
-      die;
-    }
+//     } else {
+//      dump(Auth::user()->car);
+//      die;
+//    }
     return response()->json([
       'status' => "OK",
       'car' => $car
@@ -34,6 +34,7 @@ class CarController extends Controller
     $product = Input::get('product');
     $cant = Input::get('cant');
     $product = Product::find($product);
+    $product->photos;
     $car = request()->session()->get('car', []);
     $index=$key = array_search($product, array_column($car, 'product'));
     if($index===false){
@@ -45,7 +46,37 @@ class CarController extends Controller
     return response()->json([
       'status' => "OK",
       'car' => $car,
-      'index'=>$index
     ]);
   }
+
+  public function productId($id){
+    $car = request()->session()->get('car', []);
+    $cant = Input::get('cant');
+    $car[$id]['cant']=$cant;
+    request()->session()->put('car', $car);
+    return response()->json([
+      'status' => "OK",
+      'car' => $car,
+    ]);
+  }
+
+  public function clear(){
+    request()->session()->put('car', []);
+    return response()->json([
+      'status' => "OK",
+      'car' => [],
+    ]);
+  }
+
+  public function destroy($id){
+    $car = request()->session()->get('car', []);
+    unset($car[$id]);
+    request()->session()->put('car', $car);
+    return response()->json([
+      'status' => "OK",
+      'car' => $car,
+    ]);
+  }
+
+
 }

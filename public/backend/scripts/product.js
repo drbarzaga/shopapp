@@ -13,13 +13,13 @@ var product = new Vue({
   methods: {
     getData: function () {
       var url = window.Shop.baseUrl + '/product/field';
-      axios.get(url).then(function (response) {
+      this.$http.get(url).then(function (response) {
         if (response.status == 200 && response.data.status == "OK") {
-          product.fields = response.data.field;
+          this.fields = response.data.field;
           var url = window.Shop.baseUrl + '/product';
-          axios.get(url).then(function (response) {
+          this.$http.get(url).then(function (response) {
             if (response.status == 200 && response.data.status == "OK") {
-              product.products = response.data.products;
+              this.products = response.data.products;
               setTimeout(function () {
                 $('.bxslider').removeClass("hide");
                 $('.bxslider').bxSlider({
@@ -32,11 +32,11 @@ var product = new Vue({
         }
       });
       var url = window.Shop.baseUrl + '/category';
-      axios.get(url).then(function (response) {
+      this.$http.get(url).then(function (response) {
         if (response.status == 200 && response.data.status == "OK") {
-          product.categories = response.data.category;
-          product.selected = response.data.category[0].id;
-          setTimeout(function(){
+          this.categories = response.data.category;
+          this.selected = response.data.category[0].id;
+          setTimeout(function () {
             $("select").select2({
               placeholder: 'Select an option'
             });
@@ -113,7 +113,7 @@ $("#productForm").validate({
       var element = $(this);
       formData.append("field[]", JSON.stringify({id: element.attr('data-id'), value: element.val()}));
     });
-    axios.post($('#urlCreate').val(), formData).then(function (res) {
+    product.$http.post($('#urlCreate').val(), formData).then(function (res) {
       if (res.status == 200 && res.data.status == "OK") {
         product.getData();
         $("#addProduct").modal("hide");

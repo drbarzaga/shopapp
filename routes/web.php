@@ -600,17 +600,19 @@ Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {
         'as' => 'api_car_user_create',
         'uses' => 'CarController@product'
       ]);
+      Route::post('/{id}', [
+        'as' => 'api_car_user_update',
+        'uses' => 'CarController@productId'
+      ]);
+      Route::delete('/all', [
+        'as' => 'api_car_user_clear',
+        'uses' => 'CarController@clear'
+      ]);
       Route::delete('/{id}', [
         'as' => 'api_car_user_destroy',
-        'uses' => 'UserController@destroy'
-      ]);
-      Route::delete('/clear', [
-        'as' => 'api_car_user_clear',
         'uses' => 'CarController@destroy'
       ]);
     });
-
-
   });
 });
 

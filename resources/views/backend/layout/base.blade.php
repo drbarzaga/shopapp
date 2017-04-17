@@ -4,6 +4,7 @@
   <title>Admin</title>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta id="token" name="token" value="{{ csrf_token() }}">
   @include('backend.layout.css')
   @yield('css')
 

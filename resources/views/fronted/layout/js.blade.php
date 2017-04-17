@@ -12,14 +12,24 @@
 <script src="{{asset('fronted/js/styleswitcher.js')}}"></script>
 <script src="{{asset('fronted/js/script.js')}}"></script>
 <script src="{{asset('js/vue2/vue.js')}}"></script>
-<script src="{{asset('js/axios/axios.js')}}"></script>
+<script src="{{asset('js/vue2/vue-resource.js')}}"></script>
 <script src="{{asset('fronted/js/bootstrap.touchspin.js')}}"></script>
 <script type="text/javascript">
   window.Shop = {baseUrl: '{!! url('/api/') !!}', csrfToken: '{{ csrf_token() }}'};
   window.baseURL = "{{url('/')}}";
+  Vue.http.headers.common['X-CSRF-TOKEN'] = $("#token").attr("value");
   Vue.directive('tip-bottom', function (el) {
     $(el).tooltip({ placement: 'bottom' });
   });
+  Vue.directive('touch-spin', function (el) {
+    setTimeout(function () {
+      $(el).TouchSpin({
+        verticalbuttons: true,
+        min:1
+      });
+    });
+  });
+
 </script>
 <script src="{{asset('fronted/scripts/carShop.js')}}"></script>
 

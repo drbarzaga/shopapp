@@ -16,20 +16,20 @@ var product = new Vue({
   methods: {
     getData:function(){
       var url=window.Shop.baseUrl+'/category/root';
-      axios.get(url).then(function(response) {
+      this.$http.get(url).then(function(response) {
         if(response.status==200 && response.data.status=="OK"){
-          product.categories=response.data.category;
+          this.categories=response.data.category;
         }
       });
       var url=window.Shop.baseUrl+'/product/field';
-      axios.get(url).then(function(response) {
+      this.$http.get(url).then(function(response) {
         if(response.status==200 && response.data.status=="OK"){
-          product.fields=response.data.field;
+          this.fields=response.data.field;
           var url=window.Shop.baseUrl+'/product/'+$("#productId").val();
-          axios.get(url).then(function(response) {
+          this.$http.get(url).then(function(response) {
             if(response.status==200 && response.data.status=="OK"){
-              product.product=response.data.product;
-              product.breads=response.data.bread;
+              this.product=response.data.product;
+              this.breads=response.data.bread;
               $("#category"+product.breads[0].id).addClass("active");
               setTimeout(function(){
                 $('[data-fancybox="gallery"]').fancybox({

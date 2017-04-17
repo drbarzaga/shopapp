@@ -12,16 +12,16 @@ var home = new Vue({
   methods: {
     getData:function(){
       var url=window.Shop.baseUrl+'/category/root';
-      axios.get(url).then(function(response) {
+      this.$http.get(url).then(function(response) {
         if(response.status==200 && response.data.status=="OK"){
-          home.categories=response.data.category;
-          home.selectImg=response.data.category[0].photo;
+          this.categories=response.data.category;
+          this.selectImg=response.data.category[0].photo;
         }
       });
     },
     categoryOver:function(img,index){
-      home.selectImg=img;
-      home.activeIndex=index;
+      this.selectImg=img;
+      this.activeIndex=index;
     },
     categoryURL:function(url){
       return window.baseURL+"/category/"+url;

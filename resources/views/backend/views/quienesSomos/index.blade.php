@@ -18,7 +18,7 @@
     $('#submenu_quienesS').addClass('active');
     $("#guardar-1").on('click',function(){
       var content=$('#editor').froalaEditor('html.get');
-      axios.post('{{route('quienes_somos_save')}}',{content:content}).then(function(data){
+      $.post('{{route('quienes_somos_save')}}',{content:content,_token: window.Shop.csrfToken}).then(function(data){
         console.log(data);
       })
     })

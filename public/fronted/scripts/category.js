@@ -22,7 +22,7 @@ var category = new Vue({
     activeImage:0
   },
   watch: {
-    Price: function (val) {
+    Price: function () {
       category.productList=[];
       category.products.forEach(function(item){
         if(item.price>=category.PriceValue.min && item.price<=category.PriceValue.max){
@@ -34,26 +34,25 @@ var category = new Vue({
   methods: {
     getData:function(){
       var url=window.Shop.baseUrl+'/category/root';
-      axios.get(url).then(function(response) {
+      this.$http.get(url).then(function(response) {
         if(response.status==200 && response.data.status=="OK"){
-          category.categories=response.data.category;
-          category.selectImg=response.data.category[0].photo;
+          this.categories=response.data.category;
+          this.selectImg=response.data.category[0].photo;
         }
       });
       var url=window.Shop.baseUrl+'/product/field';
-      axios.get(url).then(function(response) {
+      this.$http.get(url).then(function(response) {
         if(response.status==200 && response.data.status=="OK"){
-          console.log(response.data.field);
-          category.fields=response.data.field;
+          this.fields=response.data.field;
         }
       });
       var url=window.Shop.baseUrl+'/category/'+$("#categoryId").val();
-      axios.get(url).then(function (response) {
+      this.$http.get(url).then(function (response) {
         if (response.status == 200 && response.data.status == "OK") {
-          category.subCategory=response.data.category.get_childrens;
-          category.categoryTitle=response.data.category.title;
-          category.breads=response.data.bread;
-          $("#category"+category.breads[0].id).addClass("active");
+          this.subCategory=response.data.category.get_childrens;
+          this.categoryTitle=response.data.category.title;
+          this.breads=response.data.bread;
+          $("#category"+this.breads[0].id).addClass("active");
           var product=response.data.category.products;
           var max=Math.max.apply(Math,product.map(function(o){return o.price;}));
           var min=Math.min.apply(Math,product.map(function(o){return o.price;}));
@@ -61,8 +60,8 @@ var category = new Vue({
             max=0;
             min=0;
           }
-          category.PriceValue.max=max;
-          category.PriceValue.min=min;
+          this.PriceValue.max=max;
+          this.PriceValue.min=min;
           $("#slider-range").slider({
             range: true,
             min: min,
@@ -74,8 +73,8 @@ var category = new Vue({
               category.Price=ui.values[1]-ui.values[0];
             }
           });
-          category.products=product;
-          category.productList=product;
+          this.products=product;
+          this.productList=product;
         }
       });
     },
@@ -86,7 +85,7 @@ var category = new Vue({
       return window.baseURL+"/product/"+url;
     },
     activeProduct:function(pos){
-      category.active=category.productList[pos];
+      this.active=category.productList[pos];
     }
   },
   mounted:function(){

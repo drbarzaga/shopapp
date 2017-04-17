@@ -102,6 +102,24 @@ ul li {
   color: #333 !important;
 }
 
+.btn-danger {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  border-radius: 0;
+  color: #fff !important;
+  text-shadow: none;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn-danger:hover {
+  background: none;
+  border: 1px solid #333;
+  color: #333 !important;
+}
+
 /**** Start Section Title Section ****/
 
 h3.section-title {
@@ -203,7 +221,7 @@ ul.top-social li a i {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -o-border-radius: 0;
-  z-index: 99999;
+  z-index: 1994;
 }
 
 .navbar .navbar-collapse {
@@ -2439,13 +2457,6 @@ ul.icons-list li i {
   margin-right: 15px;
 }
 
-.product-quantity, .product-quantity .input-group {
-  width: 70px;
-  float: left;
-  margin-right: 20px;
-  position: relative;
-}
-
 .product-pop-up .product-quantity, .product-pop-up .product-quantity .input-group {
   margin-right: 15px;
 }
@@ -2514,3 +2525,4 @@ input {
 .pull-left-nav {
   right: 0 !important;
 }
+
