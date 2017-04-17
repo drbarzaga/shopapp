@@ -136,104 +136,14 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin'], function () {
         'uses' => 'UserController@destroy'
       ]);
     });
-    /**
-     * User authenticate required for access in this section
-     * this section contains the routes for access to the
-     * functions stores in UserFieldController
-     */
-    Route::group(['prefix' => 'user/field'], function () {
-      /**
-       * Route for show all user field resources
-       */
-      Route::get('list', [
-        'as' => 'admin_user_field_list',
-        'uses' => 'UserFieldController@index'
-      ]);
-      /**
-       * Route for show form for create user field
-       */
-      Route::get('create', [
-        'as' => 'admin_user_field_create',
-        'uses' => 'UserFieldController@create'
-      ]);
-      /**
-       * Route for store user field
-       */
-      Route::post('store', [
-        'as' => 'admin_user_field_store',
-        'uses' => 'UserFieldController@store'
-      ]);
-      /**
-       * Route show form for edit
-       */
-      Route::get('edit', [
-        'as' => 'admin_user_field_edit',
-        'uses' => 'UserFieldController@edit'
-      ]);
-      /**
-       * Route for update user field
-       */
-      Route::post('update', [
-        'as' => 'admin_user_field_update',
-        'uses' => 'UserFieldController@update'
-      ]);
-      /**
-       * Route for destroy user field
-       */
-      Route::post('destroy', [
-        'as' => 'admin_user_field_destroy',
-        'uses' => 'UserFieldController@destroy'
-      ]);
-    });
-    /**
-     * User authenticate required for access in this section
-     * this section contains the routes for access to the
-     * functions stores in UserFieldSettingController
-     */
-    Route::group(['prefix' => 'user/field/setting'], function () {
-      /**
-       * Route for show all user field setting resources
-       */
-      Route::get('list', [
-        'as' => 'admin_user_field_setting_list',
-        'uses' => 'UserFieldSettingController@index'
-      ]);
-      /**
-       * Route for show form for create user setting field
-       */
-      Route::get('create', [
-        'as' => 'admin_user_field_setting_create',
-        'uses' => 'UserFieldSettingController@create'
-      ]);
-      /**
-       * Route for store user field setting
-       */
-      Route::post('store', [
-        'as' => 'admin_user_field_setting_store',
-        'uses' => 'UserFieldSettingController@store'
-      ]);
-      /**
-       * Route show form for edit
-       */
-      Route::get('edit', [
-        'as' => 'admin_user_field_setting_edit',
-        'uses' => 'UserFieldSettingController@edit'
-      ]);
-      /**
-       * Route for update user field setting
-       */
-      Route::post('update', [
-        'as' => 'admin_user_field_setting_update',
-        'uses' => 'UserFieldSettingController@update'
-      ]);
-      /**
-       * Route for destroy user field setting
-       */
-      Route::post('destroy', [
-        'as' => 'admin_user_field_setting_destroy',
-        'uses' => 'UserFieldSettingController@destroy'
-      ]);
-    });
+    Route::get('/', [
+      'as' => 'admin_user_list',
+      'uses' => 'UserController@index'
+    ]);
+    Route::get('/config', [
+      'as' => 'admin_user_field',
+      'uses' => 'UserController@indexField'
+    ]);
   });
 
   /**
@@ -641,7 +551,69 @@ Route::group(['namespace' => 'Api', 'prefix' => 'api'], function () {
 
 
   });
+  Route::group(['namespace' => 'User'], function () {
+    Route::group(['prefix' => 'user'], function () {
+      Route::get('/field', [
+        'as' => 'api_user_field_list',
+        'uses' => 'UserController@indexField'
+      ]);
+      Route::post('/field', [
+        'as' => 'api_user_field_create',
+        'uses' => 'UserController@createField'
+      ]);
+      Route::get('/', [
+        'as' => 'api_user_list',
+        'uses' => 'UserController@index'
+      ]);
+      Route::get('/{id}', [
+        'as' => 'api_user_show',
+        'uses' => 'UserController@indexId'
+      ]);
+      Route::post('/', [
+        'as' => 'api_user_create',
+        'uses' => 'UserController@create'
+      ]);
+      Route::post('/{id}', [
+        'as' => 'api_user_update',
+        'uses' => 'UserController@edit'
+      ]);
+      Route::delete('/{id}', [
+        'as' => 'api_user_destroy',
+        'uses' => 'UserController@destroy'
+      ]);
+
+    });
+
+
+  });
+  Route::group(['namespace' => 'Car'], function () {
+    Route::group(['prefix' => 'car'], function () {
+      Route::get('/', [
+        'as' => 'api_car_user',
+        'uses' => 'CarController@userCar'
+      ]);
+      Route::get('/all', [
+        'as' => 'api_car_all',
+        'uses' => 'CarController@allCar'
+      ]);
+      Route::post('/', [
+        'as' => 'api_car_user_create',
+        'uses' => 'CarController@product'
+      ]);
+      Route::delete('/{id}', [
+        'as' => 'api_car_user_destroy',
+        'uses' => 'UserController@destroy'
+      ]);
+      Route::delete('/clear', [
+        'as' => 'api_car_user_clear',
+        'uses' => 'CarController@destroy'
+      ]);
+    });
+
+
+  });
 });
+
 
 Auth::routes();
 

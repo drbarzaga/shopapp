@@ -1,6 +1,12 @@
 @extends('fronted.layout.master')
 @section('css')
   <link href="{{asset('fronted/fancybox/jquery.fancybox_item.css')}}" rel="stylesheet">
+  <style>
+    .ui-effects-transfer {
+      z-index: 9999999999999;
+      border: 2px dotted #0a289a;
+    }
+  </style>
 @endsection
 @section('content')
 
@@ -33,10 +39,10 @@
         </div>
         <div class="product-page-cart">
           <div class="product-quantity">
-            <input id="product-quantity" type="text" value="1" readonly name="product-quantity"
+            <input id="product-quantity" type="text" value="1" min="1" readonly name="product-quantity"
                    class="form-control input-sm">
           </div>
-          <a href="javascript:;" class="btn btn-success">Añadir al carro</a>
+          <a id="addCar" data-target=".fancybox-inner" :data-id="active.id" href="javascript:;" class="btn btn-success">Añadir al carro</a>
           <a :href="productURL(active.id)" class="btn btn-primary">Ir al producto</a>
         </div>
       </div>
@@ -72,7 +78,7 @@
     <div class="col-md-9">
       <div v-if="productList.length">
         <div v-for="(product,index) in productList" class="product col-md-3 col-sm-3">
-          <div class="team-member">
+          <div class="team-member" :id="'productFast'+product.id">
             <img :src="'{{asset('uploads/Product/thumbnail')}}/'+product.photos[0].photo" class="img-responsive"
                  alt="">
             <div class="team-details">
@@ -81,7 +87,8 @@
               <ul>
                 <li><a href="#product-pop-up" v-tip-bottom v-on:click="activeProduct(index)" title="Vista rápida"
                        class="fancybox-fast-view"><i class="fa fa-eye"></i></a></li>
-                <li><a href="javascript:;" v-tip-bottom title="Adicionar al carrito"><i class="fa fa-shopping-cart"></i></a>
+                <li><a href="javascript:;" v-tip-bottom class="addCarFast" :data-id="product.id"
+                       title="Adicionar al carrito"><i class="fa fa-shopping-cart"></i></a>
                 </li>
               </ul>
             </div>
@@ -103,7 +110,8 @@
   <script>
     $("#categoryMenu").addClass("active");
     $("#product-quantity").TouchSpin({
-      verticalbuttons: true
+      verticalbuttons: true,
+      min: 1
     });
   </script>
 @endsection

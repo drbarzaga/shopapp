@@ -1,6 +1,12 @@
 @extends('fronted.layout.master')
 @section('css')
   <link href="{{asset('fronted/fancybox/jquery.fancybox.css')}}" rel="stylesheet">
+  <style>
+    .ui-effects-transfer {
+      z-index: 9999999999999;
+      border: 2px dotted #0a289a;
+    }
+  </style>
 @endsection
 @section('content')
   <div class="col-md-12">
@@ -13,7 +19,7 @@
 
   <div class="row" id="categoryContent">
     <div class="col-md-5">
-      <div class="default-page">
+      <div class="default-page" id="productContent">
         <h2>@{{ product.title }}</h2>
         <div class="price-availability-block clearfix">
           <div class="price">
@@ -33,7 +39,7 @@
             <input id="product-quantity" type="text" value="1" readonly name="product-quantity"
                    class="form-control input-sm">
           </div>
-          <button class="btn btn-success" type="submit">Añadir al carro</button>
+          <a id="addCar" :data-id="product.id" href="javascript:;" data-target="#productContent" class="btn btn-success" type="submit">Añadir al carro</a>
         </div>
       </div>
     </div>

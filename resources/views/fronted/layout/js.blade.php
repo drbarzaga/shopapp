@@ -21,3 +21,5 @@
     $(el).tooltip({ placement: 'bottom' });
   });
 </script>
+<script src="{{asset('fronted/scripts/carShop.js')}}"></script>
+

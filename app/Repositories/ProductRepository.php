@@ -42,7 +42,9 @@ class ProductRepository implements IRepository
   public function create(array $attributes)
   {
     $product = $this->model->create($attributes);
-    $this->addFieldValue($attributes['field'],$product->id);
+    if(array_key_exists('field',$attributes)) {
+      $this->addFieldValue($attributes['field'], $product->id);
+    }
     return $product;
   }
   public function addFieldValue($fields,$id){

@@ -9,44 +9,14 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    private $repository;
-    public function __construct(UserRepository $repository)
-    {
-        $this->repository = $repository;
-    }
 
-    public function index()
-    {
-        $users = $this->repository->getAll();
-        dd($users);
-        dd('ADMIN/USER/LIST');
-    }
+  public function index()
+  {
+    return view('backend.views.user.index');
+  }
 
-    public function create()
-    {
-        dd('ADMIN/USER/CREATE');
-    }
-
-    public function store(StoreUserRequest $request)
-    {
-        dd('ADMIN/USER/STORE');
-    }
-
-    public function edit()
-    {
-        dd('ADMIN/USER/EDIT');
-    }
-
-    public function update(Request $request)
-    {
-        dd('ADMIN/USER/UPDATE');
-    }
-
-    public function destroy(Request $request)
-    {
-        $message='';
-        if($request->ajax()){
-            return json_encode(['message'=>$message]);
-        }
-    }
+  public function indexField()
+  {
+    return view('backend.views.user.index_field');
+  }
 }

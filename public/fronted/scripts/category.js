@@ -99,6 +99,7 @@ $(".fancybox-fast-view").fancybox({
     category.activeImage=0;
   },
   afterClose: function(){
+    $("#product-quantity").val("1");
     $("html").niceScroll({
       scrollspeed: 100,
       mousescrollstep: 38,

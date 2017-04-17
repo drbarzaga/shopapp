@@ -17,18 +17,33 @@
 </head>
 
 <body>
-<div id="templateVue">
-  <!-- car section
-  ================================================== -->
-  @if (Auth::check())
-    <div class="colors-switcher">
-      <a id="show-panel" class="show-panel"><i class="fa fa-shopping-cart"></i></a>
-
-    </div>
-  @endif
-<!-- car section End
+<!-- car section
 ================================================== -->
 
+<div id="carShop" class="colors-switcher" style="text-align: center">
+  <a id="show-panel" class="show-panel"><i class="fa fa-shopping-cart"></i></a>
+  <table class="table table-responsive ">
+    <tbody>
+    <tr>
+      <td>Sub-Total</td>
+      <td>@{{ subTotal | round}}</td>
+    </tr>
+    <tr>
+      <td>Impuesto</td>
+      <td>@{{ subTotal*tax | round}}</td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td>@{{ subTotal*tax + subTotal | round}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="javascript:;">ver carro</a> | <a href="javascript:;">realizar compra</a>
+</div>
+
+<!-- car section End
+================================================== -->
+<div id="templateVue">
   <!-- Start Loader -->
   <div id="loader">
     <div class="spinner">
@@ -96,17 +111,51 @@
             <li>
               <a id="termCond" href="{{route('f_term_cond')}}">Términos y condiciones</a>
             </li>
-            <li>
-              <a href="blog.html">Usuario</a>
-              <ul class="dropdown">
-                <li>
-                  <a href="blog.html">Mi cuenta</a>
-                </li>
-                <li>
-                  <a href="blog-single-post.html">Salir</a>
-                </li>
-              </ul>
-            </li>
+
+            @if (Auth::guest())
+              <li>
+                <a class="visible-xs visible-sm" href="{{ url('/login') }}">Autenticarce</a>
+              </li>
+            @else
+              <li class="visible-xs visible-sm">
+                <a href="blog.html">{{Auth::user()->username}}</a>
+                <ul class="dropdown">
+                  <li>
+                    <a href="blog.html">Mi cuenta</a>
+                  </li>
+                  <li>
+                    <a href="blog-single-post.html">Salir</a>
+                  </li>
+                </ul>
+              </li>
+            @endif
+          </ul>
+          <ul class="nav navbar-nav navbar-right visible-md visible-lg">
+            @if (Auth::guest())
+              <li>
+                <a href="{{ url('/login') }}">Autenticarce</a>
+              </li>
+            @else
+              <li class="visible-md visible-lg">
+                <a href="blog.html">{{Auth::user()->username}}</a>
+                <ul class="dropdown pull-left-nav">
+                  <li>
+                    <a href="blog.html">Mi cuenta</a>
+                  </li>
+                  <li>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                      Salir
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                    </form>
+                  </li>
+                </ul>
+              </li>
+            @endif
           </ul>
           <!-- End Navigation List -->
         </div>
@@ -115,7 +164,8 @@
     </div>
     <!-- End Navigation Section -->
 
-    @yield('content')
+  @yield('content')
+  <!-- Start Footer Section -->
     <div style="width: 100%">
       <div class="row">
         <div class="col-md-12">
@@ -197,10 +247,9 @@
         </div>
       </div>
     </div>
+    <!-- End Copyright Section -->
   </div><!-- /.container -->
-  <!-- Start Footer Section -->
 
-  <!-- End Copyright Section -->
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 </div>
 @include('fronted.layout.js')

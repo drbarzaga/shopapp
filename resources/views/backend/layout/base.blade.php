@@ -71,7 +71,7 @@
       <ul>
         <li id="submenu_field_product"><a href="{{route('admin_product_field')}}">Campos de producto</a></li>
         <li id="submenu_field_product"><a href="gallery.html">Campos de pedido</a></li>
-        <li id="submenu_field_user"><a href="gallery.html">Campos de usuario</a></li>
+        <li id="submenu_field_user"><a href="{{route('admin_user_field')}}">Campos de usuario</a></li>
       </ul>
     </li>
     <li id="menu_locals"><a href="/admin/local"><i class="icon icon-list-alt"></i> <span>Locales</span></a></li>

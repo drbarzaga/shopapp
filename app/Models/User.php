@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password','active'
+        'username', 'email', 'password','active','role'
     ];
 
     /**
@@ -30,7 +30,7 @@ class User extends Authenticatable
     ];
 
     public function car(){
-        $this->hasOne('App\Models\Car');
+       return $this->hasOne('App\Models\Car');
     }
 
     public function orders(){
