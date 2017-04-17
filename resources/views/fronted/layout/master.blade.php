@@ -8,6 +8,7 @@
   <title>TITULO</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta id="token" name="token" value="{{ csrf_token() }}">
 @include('fronted.layout.css')
 @yield('css')
 
@@ -20,27 +21,72 @@
 <!-- car section
 ================================================== -->
 
-<div id="carShop" class="colors-switcher" style="text-align: center">
-  <a id="show-panel" class="show-panel"><i class="fa fa-shopping-cart"></i></a>
-  <table class="table table-responsive ">
-    <tbody>
-    <tr>
-      <td>Sub-Total</td>
-      <td>@{{ subTotal | round}}</td>
-    </tr>
-    <tr>
-      <td>Impuesto</td>
-      <td>@{{ subTotal*tax | round}}</td>
-    </tr>
-    <tr>
-      <td>Total</td>
-      <td>@{{ subTotal*tax + subTotal | round}}</td>
-    </tr>
-    </tbody>
-  </table>
-  <a href="javascript:;">ver carro</a> | <a href="javascript:;">realizar compra</a>
+<div id="carShop">
+  <div class="modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+              class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">Carro de compras</h4>
+        </div>
+        <div class="modal-body">
+          <table  class="table table-responsive">
+            <thead>
+            <tr>
+              <th width="10%">Foto</th>
+              <th>Titulo</th>
+              <th>Precio</th>
+              <th width="20%">Cantidad</th>
+              <th>Sub-Total</th>
+              <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(element,index) in car">
+              <td><img class="img-responsive" :src="'{{asset('uploads/Product/thumbnail')}}/'+element.product.photos[0].photo"></td>
+              <td>@{{ element.product.title }}</td>
+              <td>@{{ element.product.price }}</td>
+              <td>
+                <input :id="'price'+index" type="text" v-touch-spin :value="element.cant" :data-default="element.cant" class="form-control item-price"/>
+              </td>
+              <td>@{{ element.product.price * element.cant }}</td>
+              <td>
+                <a href="javascript:;" :data-index="index" class="btn btn-success refreshProductCar" type="submit"><i class="fa fa-refresh"></i></a>
+                <a href="javascript:;" :data-index="index" class="btn btn-danger removeProductCar" type="submit"><i class="fa fa-remove"></i></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="clearCar" class="btn btn-danger">Vaciar carro</button>
+          <button type="button" class="btn btn-primary">Realizar compra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="colors-switcher" style="text-align: center">
+    <a id="show-panel" class="show-panel"><i class="fa fa-shopping-cart"></i></a>
+    <table class="table table-responsive ">
+      <tbody>
+      <tr>
+        <td>Sub-Total</td>
+        <td>@{{ subTotal | round}}</td>
+      </tr>
+      <tr>
+        <td>Impuesto</td>
+        <td>@{{ subTotal*tax | round}}</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td>@{{ subTotal*tax + subTotal | round}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <a data-toggle="modal" href="#carModal">ver carro</a> | <a href="javascript:;">realizar compra</a>
+  </div>
 </div>
-
 <!-- car section End
 ================================================== -->
 <div id="templateVue">
