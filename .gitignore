@@ -9,4 +9,6 @@ Homestead.yaml
 .env
 pull.bat
 push.bat
-/public/uploads
+/public/uploads/Category
+/public/uploads/Local
+/public/uploads/Product
